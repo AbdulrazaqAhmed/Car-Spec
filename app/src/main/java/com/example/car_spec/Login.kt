@@ -1,0 +1,59 @@
+package com.example.car_spec
+
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+
+class Login : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_login)
+
+        val logEmail : EditText = findViewById(R.id.email_login_Edittext)
+        val logPass  : EditText = findViewById(R.id.password_login_editText)
+        val logButton : Button = findViewById(R.id.login_Button)
+        val forgotPass: TextView = findViewById(R.id.forgotPasssword_textview)
+        val registerHere : TextView = findViewById(R.id.regiseterHereNav_textview)
+
+        registerHere.setOnClickListener(){
+
+        startActivity(Intent(this,Register::class.java))
+            finish()
+        }
+
+        logButton.setOnClickListener {
+            val emailLog :String = logEmail.text.toString()
+            val passLog  :String = logPass.text.toString()
+            if (emailLog.isNotEmpty() && passLog.isNotEmpty()){
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(emailLog, passLog)
+                    .addOnCompleteListener(){
+                            task -> if (task.isSuccessful){
+                        Toast.makeText(this,"Logged in Successfully", Toast.LENGTH_SHORT).show()
+                        //Navigate to Main Activity
+                        val intent = Intent (this, MainActivity::class.java)
+                        intent.putExtra("UserId",FirebaseAuth.getInstance().currentUser!!.uid)
+                        intent.putExtra("Email",FirebaseAuth.getInstance().currentUser!!.email)
+                        startActivity(intent)
+                        finish()
+                    }
+                    else{
+                        Toast.makeText(this, task.exception!!.message.toString(), Toast.LENGTH_SHORT).show()
+                    }
+
+                    }
+            }
+
+        }
+
+
+
+
+
+    }
+}
+
