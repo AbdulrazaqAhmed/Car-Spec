@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarSpec">
         <activity
-            android:name=".Register"
+            android:name=".accessablity.Register"
             android:exported="true" />
         <activity
             android:name=".Login"

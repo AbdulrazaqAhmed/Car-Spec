@@ -1,4 +1,4 @@
-package com.example.car_spec
+package com.example.car_spec.accessablity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.car_spec.MainActivity
+import com.example.car_spec.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -28,6 +30,7 @@ class Register : AppCompatActivity() {
         regButton.setOnClickListener {
                 val emailReg : String =regEmail.text.toString()
                 val passReg : String = regPass.text.toString()
+
 
             if (emailReg.isNotEmpty() && passReg.isNotEmpty()){
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(emailReg,passReg).addOnCompleteListener{
