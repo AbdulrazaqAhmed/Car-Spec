@@ -13,10 +13,10 @@
             android:name=".accessablity.Register"
             android:exported="true" />
         <activity
-            android:name=".Login"
+            android:name=".accessablity.Login"
             android:exported="true" />
         <activity
-            android:name=".view.Splash"
+            android:name=".view.main.Splash"
             android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />

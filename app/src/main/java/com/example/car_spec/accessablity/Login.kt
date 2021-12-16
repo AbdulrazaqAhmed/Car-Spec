@@ -10,6 +10,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.car_spec.MainActivity
+import com.example.car_spec.R
 import com.google.firebase.auth.FirebaseAuth
 
 
