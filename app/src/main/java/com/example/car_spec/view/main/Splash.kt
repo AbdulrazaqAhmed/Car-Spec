@@ -1,4 +1,4 @@
-package com.example.car_spec.view
+package com.example.car_spec.view.main
 
 import android.content.ContentValues.TAG
 import android.content.Context
@@ -8,10 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
-import com.example.car_spec.Login
 import com.example.car_spec.MainActivity
 import com.example.car_spec.R
-import com.example.car_spec.SHARED_PREF_FILE
+import com.example.car_spec.accessablity.SHARED_PREF_FILE
 
 private lateinit var sharedPref : SharedPreferences
 

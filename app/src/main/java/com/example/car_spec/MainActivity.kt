@@ -8,37 +8,37 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.car_spec.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 private lateinit var sharedPref : SharedPreferences
 private lateinit var sharedPrefEditor: SharedPreferences.Editor
 class MainActivity : AppCompatActivity() {
+    private lateinit var navController : NavController
+    private lateinit var binding : ActivityMainBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-//        val userIdTextView : TextView = findViewById(R.id.userID_TextView)
-//        val emailAddressTextView : TextView = findViewById(R.id.emailAddress_TextView)
-//        val logoutButton : Button = findViewById(R.id.logout_button)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView3) as NavHostFragment
+        navController = navHostFragment.navController
 
-//        val userID = intent.getStringArrayExtra("UserId")
-//        val emailAddress = intent.getBooleanArrayExtra("Email")
-//
-//        userIdTextView.text= "UserID:" + userID
-//        emailAddressTextView.text = "EmailAddress: " + emailAddress
-//
-//
-//        logoutButton.setOnClickListener{
-//            FirebaseAuth.getInstance().signOut()
-//            startActivity(Intent(this,Login::class.java))
-//            finish()
-//            sharedPref = this.getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
-//            sharedPrefEditor = sharedPref.edit()
-//            sharedPrefEditor.putBoolean("state", false)
-//            sharedPrefEditor.commit()
-//
-//        }
+        setupActionBarWithNavController(navController)
 
 
+        NavigationUI.setupWithNavController(binding.bottomNavigationView,navController)
+
+
+
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp()
     }
 }
 

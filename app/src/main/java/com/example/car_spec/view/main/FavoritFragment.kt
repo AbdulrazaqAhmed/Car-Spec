@@ -1,4 +1,4 @@
-package com.example.car_spec.view.adapters
+package com.example.car_spec.view.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

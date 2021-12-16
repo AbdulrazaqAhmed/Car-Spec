@@ -2,4 +2,15 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph" />
+    android:id="@+id/nav_graph">
+    <fragment
+        android:id="@+id/favoritFragment2"
+        android:name="com.example.car_spec.view.main.FavoritFragment"
+        android:label="fragment_favorit"
+        tools:layout="@layout/fragment_favorit" />
+    <fragment
+        android:id="@+id/carFragment"
+        android:name="com.example.car_spec.view.main.CarFragment"
+        android:label="fragment_car"
+        tools:layout="@layout/fragment_car" />
+</navigation>
