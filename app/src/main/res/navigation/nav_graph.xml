@@ -13,5 +13,9 @@
         android:id="@+id/carFragment"
         android:name="com.example.car_spec.view.main.CarFragment"
         android:label="fragment_car"
-        tools:layout="@layout/fragment_car" />
+        tools:layout="@layout/fragment_car" >
+        <action
+            android:id="@+id/action_carFragment_to_favoritFragment2"
+            app:destination="@id/favoritFragment2" />
+    </fragment>
 </navigation>
