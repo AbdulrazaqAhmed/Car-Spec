@@ -51,6 +51,7 @@ class Login : AppCompatActivity() {
                         sharedPrefEditor.commit()
                         Toast.makeText(this,"Logged in Successfully", Toast.LENGTH_SHORT).show()
 
+
                         //Navigate to Main Activity
                         val intent = Intent (this, MainActivity::class.java)
                         intent.putExtra("UserId",FirebaseAuth.getInstance().currentUser!!.uid)

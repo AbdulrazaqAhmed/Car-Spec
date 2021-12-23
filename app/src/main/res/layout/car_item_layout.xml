@@ -24,14 +24,8 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <ToggleButton
-                android:id="@+id/favorite_toggle_button"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:textColor="@android:color/transparent" />
-
             <ImageView
-                android:id="@+id/product_imageview"
+                android:id="@+id/carImage_imageview"
                 android:layout_width="wrap_content"
                 android:layout_height="120dp"
                 android:layout_marginTop="15dp"
@@ -48,7 +42,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/product_name_textview"
+            android:id="@+id/titel_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -56,10 +50,22 @@
             android:textSize="10sp" />
 
         <TextView
-            android:id="@+id/product_price_textview"
+            android:id="@+id/location_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:textColor="@android:color/holo_blue_bright" />
+
+        <TextView
+            android:id="@+id/dateCreated_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ToggleButton
+            android:id="@+id/favorite_toggle_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:textColor="@android:color/transparent" />
     </LinearLayout>
 
 </LinearLayout>
