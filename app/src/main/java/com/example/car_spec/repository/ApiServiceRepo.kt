@@ -21,6 +21,10 @@ class ApiServiceRepo(context : Context) {
    private val  sharedPreferences = context.getSharedPreferences(SHARED_PREF_FILE,Context.MODE_PRIVATE)
    private val userId =sharedPreferences.getString(USER_ID,"")
    private var firestore : FirebaseFirestore = FirebaseFirestore.getInstance()
+   private val users = firestore.collection("user")
+   private val car = firestore.collection("car")
+   private lateinit var carRepo : ApiServiceRepo
+
 
 
 
@@ -29,39 +33,11 @@ class ApiServiceRepo(context : Context) {
 //      .addConverterFactory(GsonConverterFactory.create())
 //      .build()
 
+//suspend fun getProducts()= users.add && user.get
 
 
-   init {
-      firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
+     suspend fun getCars() = firestore.firestoreSettings
 
-   }
-
-   fun save (user : User){
-      firestore.collection("user")
-         .add(user)
-         .addOnSuccessListener {
-            Log.d("Firebase","Document saved")
-
-         }
-         .addOnFailureListener() {
-            Log.d("Firebase","save Failed ")
-
-
-         }
-
-   }
-
-   fun fitch (user : User){
-      firestore.collection("user")
-         .get()
-         .addOnSuccessListener {
-
-         }
-         .addOnFailureListener() {
-
-         }
-
-   }
 
 
    companion object{

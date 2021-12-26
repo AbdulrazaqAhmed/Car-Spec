@@ -13,23 +13,69 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.core.FirestoreClient
 
-private lateinit var sharedpreff : SharedPreferences
+private lateinit var sharedpreff: SharedPreferences
+
 class CarsViewModel : ViewModel() {
-//-----------------------Repo declaration--------------
+    //-----------------------Repo declaration--------------
     private val apiServ = ApiServiceRepo.get()
 
-//----------------------live Data && Error Data -----------
-    private val carsLiveData = MutableLiveData<List<CarModel>>()
-    private val carsErrorLiveData = MutableLiveData<List<String>>()
+    //----------------------live Data && Error Data -----------
+    val carsLiveData =
+        MutableLiveData<List<CarModel>>()       //open variable to usse in car fragment observer fun
+    val carsErrorLiveData =
+        MutableLiveData<List<String>>()    //open variable to usse in car fragment observer fun
+    private var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private val users = firestore.collection("user")
+    private val car = firestore.collection("car")
+
+    init {
+        firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
+
+    }
 
 
+    fun save(car: CarModel) {
+        firestore.collection("car")
+            .add(car)
+            .addOnSuccessListener {
+                Log.d("Firebase", "Document saved")
+
+            }
+
+            .addOnFailureListener() {
+                Log.d("Firebase", "save Failed ")
+
+            }
+
+    }
+
+    fun fitch(car: CarModel) {
+        firestore.collection("car")
+            .get()
+            .addOnSuccessListener {
+
+            }
+            .addOnFailureListener() {
+
+            }
+
+    }
+
+    // Update - set
+
+    fun set(car: CarModel) {
+        firestore.collection("car")
+            .add(car)
+
+    }
+
+    // Delete - delete
+
+    fun delete(car: CarModel) {
+        firestore.collection("car")
 
 
-
-
-
-
-
+    }
 
 
 }

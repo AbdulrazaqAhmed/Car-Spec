@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/carFragment">
+    app:startDestination="@id/addCarFragment">
     <fragment
         android:id="@+id/favoritFragment2"
         android:name="com.example.car_spec.view.main.FavoritFragment"
@@ -17,5 +17,13 @@
         <action
             android:id="@+id/action_carFragment_to_favoritFragment2"
             app:destination="@id/favoritFragment2" />
+        <action
+            android:id="@+id/action_carFragment_to_addCarFragment"
+            app:destination="@id/addCarFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addCarFragment"
+        android:name="com.example.car_spec.view.main.AddCarFragment"
+        android:label="fragment_add_car"
+        tools:layout="@layout/fragment_add_car" />
 </navigation>

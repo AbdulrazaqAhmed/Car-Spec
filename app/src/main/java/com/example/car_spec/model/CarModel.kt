@@ -1,6 +1,6 @@
 package com.example.car_spec.model
 
-
+import java.util.*
 
 
 data class CarModel(
@@ -12,8 +12,9 @@ data class CarModel(
     val Title: String,
     val Location: String,
     val Id: Int,
-    val Time: Int,
+    val Date: Date,
     val Price: Int,
+    val isFavorite: Boolean,
     val Image: String = ""
 
 )
