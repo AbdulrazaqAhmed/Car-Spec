@@ -15,7 +15,9 @@ import com.example.car_spec.model.CarModel
 import com.example.car_spec.repository.ApiServiceRepo
 import com.example.car_spec.view.adapters.CarRecyclerViewAdapter
 import com.example.car_spec.view.viewmodel.CarsViewModel
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.auth.User
+import com.google.firebase.ktx.Firebase
 import okhttp3.internal.userAgent
 
 class CarFragment : Fragment() {
@@ -27,6 +29,7 @@ class CarFragment : Fragment() {
     private lateinit var sharedPreffEditor: SharedPreferences.Editor
     private lateinit var logoutItem: MenuItem
     private lateinit var carRepo : ApiServiceRepo
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,10 +59,12 @@ class CarFragment : Fragment() {
         //
         observer()
 
+
     }
 
 
     // carViewModel.save("")     //calling function "save"  continue here
+
 
     fun observer() {
 
@@ -69,6 +74,7 @@ class CarFragment : Fragment() {
             allCars = it
             carAdapter.submitList(it)
             binding.carItemRecyclerView.animate().alpha(1F)
+            binding.carItemRecyclerView
 
         })
 
@@ -116,6 +122,9 @@ class CarFragment : Fragment() {
             }
 
         })
+
+       // carViewModel.fitch("")
+
 
 
     }

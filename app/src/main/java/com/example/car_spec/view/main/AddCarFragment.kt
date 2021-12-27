@@ -15,7 +15,7 @@ import java.util.*
 
 class AddCarFragment : Fragment() {
     private lateinit var binding: FragmentAddCarBinding
-    val carViewModel : CarsViewModel by activityViewModels()
+    val carViewModel: CarsViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -43,15 +43,32 @@ class AddCarFragment : Fragment() {
 
         binding.saveAddButton.setOnClickListener() {
 
-            val brandMake = binding.makeAddEditText.text.toString()
+            val brandMake  = binding.makeAddEditText.text.toString()
 
-            val brandModel = binding.modelAddEdittext.text.toString()
+            val brandModel =  binding.modelAddEdittext.text.toString()
 
-            val brandColor = binding.colorAddEdittext.text.toString()
+            val brandColor =  binding.colorAddEdittext.text.toString()
+            val brandYear  =  binding.yearAddEdittext.text.toString()
+            val addTitle   = binding.titleAddEditTextText.text.toString()
+            val addLocation= binding.locationAddEdittext.text.toString()
+            val addPrice  = binding.priceEditTextText.text.toString().toDouble()
 
-            carViewModel.save(CarModel(brandMake, brandModel, brandColor, "2000", "", "", 0, Date(), 0, true, ""))
 
-
+                carViewModel.save(
+                    CarModel(
+                        brandMake,
+                        brandModel,
+                        brandColor,
+                        brandYear,
+                        addTitle,
+                        addLocation,
+                        0,
+                        Date(),
+                        addPrice,
+                        true,
+                        ""
+                    )
+                )
 
 
         }

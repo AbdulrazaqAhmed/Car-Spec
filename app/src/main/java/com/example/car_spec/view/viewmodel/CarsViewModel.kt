@@ -1,5 +1,6 @@
 package com.example.car_spec.view.viewmodel
 
+import android.content.ContentValues.TAG
 import android.content.SharedPreferences
 import android.util.Log
 import android.widget.Toast
@@ -35,8 +36,7 @@ class CarsViewModel : ViewModel() {
 
 
     fun save(car: CarModel) {
-        firestore.collection("car")
-            .add(car)
+        apiServ.save(car)
             .addOnSuccessListener {
                 Log.d("Firebase", "Document saved")
 
@@ -49,12 +49,23 @@ class CarsViewModel : ViewModel() {
 
     }
 
-    fun fitch(car: CarModel) {
-        firestore.collection("car")
-            .get()
-            .addOnSuccessListener {
+    fun fitch() {
+        apiServ.fitch()
+        var car = mutableListOf<CarModel>()
+        val docRef = firestore.collection("cars")
+        docRef.get().addOnSuccessListener { documents ->
+            for (document in documents) {
+                Log.d(TAG, "${document.id} => ${document.data}")
+                Log.d(TAG, "${document.toObject(CarModel::class.java)}")
+
+                car.add(document.toObject(CarModel::class.java))
 
             }
+
+
+            // type observer
+        }
+
             .addOnFailureListener() {
 
             }
@@ -74,6 +85,8 @@ class CarsViewModel : ViewModel() {
     fun delete(car: CarModel) {
         firestore.collection("car")
 
+
+        fun addFavoriteCar() {}
 
     }
 

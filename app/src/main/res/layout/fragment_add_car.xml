@@ -20,16 +20,26 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:text="Get location" />
+
+    <EditText
+        android:id="@+id/titleAdd_editTextText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:ems="10"
+        android:hint=" title"
+        android:inputType="textPersonName"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/make_addEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="5dp"
         android:ems="10"
-        android:hint="type title"
+        android:hint=" make"
         android:inputType="textPersonName"
         android:minHeight="48dp" />
 
@@ -38,9 +48,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="5dp"
         android:ems="10"
-        android:hint="make"
+        android:hint=" model"
         android:inputType="textPersonName"
         android:minHeight="48dp" />
 
@@ -49,9 +59,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="5dp"
         android:ems="10"
-        android:hint="model"
+        android:hint=" location"
         android:inputType="textPersonName"
         android:minHeight="48dp" />
 
@@ -60,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="5dp"
         android:ems="10"
         android:hint="year"
         android:inputType="textPersonName"
@@ -71,9 +81,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="5dp"
         android:ems="10"
         android:hint="color"
+        android:inputType="textPersonName"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/price_editTextText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="price"
         android:inputType="textPersonName"
         android:minHeight="48dp" />
 

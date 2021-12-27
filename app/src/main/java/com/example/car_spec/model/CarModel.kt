@@ -13,7 +13,7 @@ data class CarModel(
     val Location: String,
     val Id: Int,
     val Date: Date,
-    val Price: Int,
+    val Price: Double,
     val isFavorite: Boolean,
     val Image: String = ""
 
