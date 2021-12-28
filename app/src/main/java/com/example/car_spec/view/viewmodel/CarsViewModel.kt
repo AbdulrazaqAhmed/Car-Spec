@@ -1,6 +1,5 @@
 package com.example.car_spec.view.viewmodel
 
-import android.content.ContentValues.TAG
 import android.content.SharedPreferences
 import android.util.Log
 import android.widget.Toast
@@ -11,11 +10,14 @@ import com.example.car_spec.model.CarModel
 import com.example.car_spec.repository.ApiServiceRepo
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.core.FirestoreClient
+import com.google.firebase.firestore.ktx.toObject
+import com.google.gson.Gson
 
 private lateinit var sharedpreff: SharedPreferences
-
+private const val TAG = "CarsViewModel"
 class CarsViewModel : ViewModel() {
     //-----------------------Repo declaration--------------
     private val apiServ = ApiServiceRepo.get()
@@ -50,19 +52,23 @@ class CarsViewModel : ViewModel() {
     }
 
     fun fitch() {
-        apiServ.fitch()
         var car = mutableListOf<CarModel>()
-        val docRef = firestore.collection("cars")
-        docRef.get().addOnSuccessListener { documents ->
+//        val docRef = firestore.collection("cars").orderBy("Title", Query.Direction.ASCENDING)
+        apiServ.fitch()
+            .addOnSuccessListener { documents ->
             for (document in documents) {
-                Log.d(TAG, "${document.id} => ${document.data}")
-                Log.d(TAG, "${document.toObject(CarModel::class.java)}")
+                Log.d(com.example.car_spec.view.viewmodel.TAG ,"${document.id} => ${document.data}")
+               // Log.d(com.example.car_spec.view.viewmodel.TAG, "${document.toObject(CarModel::class.java)}")
 
-                car.add(document.toObject(CarModel::class.java))
+            //    car.add(Gson().fromJson(document.data.toString(),CarModel::class.java))
+                //                car.add(Gson().fromJson(document.data.toString(),CarModel::class.java))
+
+                car.add(document.toObject<CarModel>())
+
 
             }
 
-
+            carsLiveData.postValue(car)
             // type observer
         }
 

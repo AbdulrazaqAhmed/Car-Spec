@@ -3,22 +3,17 @@ package com.example.car_spec.view.main
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import com.example.car_spec.R
 import com.example.car_spec.accessablity.SHARED_PREF_FILE
-import com.example.car_spec.databinding.ActivityMainBinding
 import com.example.car_spec.databinding.FragmentCarBinding
 import com.example.car_spec.model.CarModel
 import com.example.car_spec.repository.ApiServiceRepo
 import com.example.car_spec.view.adapters.CarRecyclerViewAdapter
 import com.example.car_spec.view.viewmodel.CarsViewModel
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.auth.User
-import com.google.firebase.ktx.Firebase
-import okhttp3.internal.userAgent
 
 class CarFragment : Fragment() {
     private var allCars = listOf<CarModel>()
@@ -28,8 +23,7 @@ class CarFragment : Fragment() {
     private lateinit var sharedpreff: SharedPreferences
     private lateinit var sharedPreffEditor: SharedPreferences.Editor
     private lateinit var logoutItem: MenuItem
-    private lateinit var carRepo : ApiServiceRepo
-
+    private lateinit var carRepo: ApiServiceRepo
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +52,7 @@ class CarFragment : Fragment() {
 
         //
         observer()
+        carViewModel.fitch()
 
 
     }
@@ -69,16 +64,15 @@ class CarFragment : Fragment() {
     fun observer() {
 
         carViewModel.carsLiveData.observe(viewLifecycleOwner, {
+            Log.d("mainAc", it.toString())
             binding.progressBar4.animate().alpha(0F)
             binding.progressBar4.animate().alpha(0F).setDuration(1000)
             allCars = it
             carAdapter.submitList(it)
             binding.carItemRecyclerView.animate().alpha(1F)
-            binding.carItemRecyclerView
+
 
         })
-
-        carViewModel.carsErrorLiveData.postValue(null)
 
 
     }
@@ -86,7 +80,9 @@ class CarFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         requireActivity().menuInflater.inflate(R.menu.main_menu, menu)
         val searchItem = menu.findItem(R.id.app_bar_search)
-        logoutItem = menu.findItem(R.id.logout_item)
+        logoutItem = menu.findItem(R.id.logout_item)    //""
+//        logoutItem.isVisible                             //""
+//        Firebase.auth().signOut()
 
 
         val searchView =
@@ -97,7 +93,7 @@ class CarFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 carAdapter.submitList(
                     allCars.filter {
-                        it.Title.lowercase().contains(query!!.lowercase())
+                        it.title.lowercase().contains(query!!.lowercase())
                     }
                 )
 
@@ -123,8 +119,7 @@ class CarFragment : Fragment() {
 
         })
 
-       // carViewModel.fitch("")
-
+        // carViewModel.fitch("")
 
 
     }

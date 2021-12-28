@@ -10,12 +10,16 @@ import com.example.car_spec.R
 import com.example.car_spec.databinding.FragmentAddCarBinding
 import com.example.car_spec.model.CarModel
 import com.example.car_spec.view.viewmodel.CarsViewModel
+import com.zhihu.matisse.Matisse
+import com.zhihu.matisse.MimeType
+import com.zhihu.matisse.internal.entity.CaptureStrategy
 import java.util.*
 
 
 class AddCarFragment : Fragment() {
     private lateinit var binding: FragmentAddCarBinding
     val carViewModel: CarsViewModel by activityViewModels()
+    private val image_Picker = 1
 
 
     override fun onCreateView(
@@ -32,7 +36,11 @@ class AddCarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.addImageImageView.setOnClickListener {
-
+            Matisse.from(this)
+                .choose(MimeType.ofImage(),false)
+                .capture(true)
+                .captureStrategy(CaptureStrategy(true,"com.example.car_spec"))
+                .forResult(image_Picker)
 
         }
 
@@ -43,32 +51,31 @@ class AddCarFragment : Fragment() {
 
         binding.saveAddButton.setOnClickListener() {
 
-            val brandMake  = binding.makeAddEditText.text.toString()
 
-            val brandModel =  binding.modelAddEdittext.text.toString()
+            val brandMake = binding.makeAddEditText.text.toString()
+            val brandModel = binding.modelAddEdittext.text.toString()
+            val brandColor = binding.colorAddEdittext.text.toString()
+            val brandYear = binding.yearAddEdittext.text.toString()
+            val addTitle = binding.titleAddEditTextText.text.toString()
+            val addLocation = binding.locationAddEdittext.text.toString()
+            val addPrice = binding.priceEditTextText.text.toString().toDouble()
 
-            val brandColor =  binding.colorAddEdittext.text.toString()
-            val brandYear  =  binding.yearAddEdittext.text.toString()
-            val addTitle   = binding.titleAddEditTextText.text.toString()
-            val addLocation= binding.locationAddEdittext.text.toString()
-            val addPrice  = binding.priceEditTextText.text.toString().toDouble()
 
-
-                carViewModel.save(
-                    CarModel(
-                        brandMake,
-                        brandModel,
-                        brandColor,
-                        brandYear,
-                        addTitle,
-                        addLocation,
-                        0,
-                        Date(),
-                        addPrice,
-                        true,
-                        ""
-                    )
+            carViewModel.save(
+                CarModel(
+                    brandMake,
+                    brandModel,
+                    brandColor,
+                    brandYear,
+                    addTitle,
+                    addLocation,
+                    0,
+                    "${Date()}",
+                    addPrice,
+                    true,
+                    ""
                 )
+            )
 
 
         }

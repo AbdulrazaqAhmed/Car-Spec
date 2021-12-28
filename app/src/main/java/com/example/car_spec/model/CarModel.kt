@@ -1,20 +1,21 @@
 package com.example.car_spec.model
 
+import com.google.gson.annotations.SerializedName
 import java.util.*
 
 
 data class CarModel(
 
-    val Make: String,
-    val Model: String,
-    val Color: String,
-    val Year: String,
-    val Title: String,
-    val Location: String,
-    val Id: Int,
-    val Date: Date,
-    val Price: Double,
-    val isFavorite: Boolean,
-    val Image: String = ""
+    val make: String = "",
+    val model: String ="",
+    val color: String ="",
+    val year: String ="",
+    val title: String = "",
+    val location: String = "",
+    val id: Int = 0,
+    val date : String = "",
+    val price: Double = 0.0,
+    val favorite: Boolean = false,
+    val image: String = ""
 
 )
