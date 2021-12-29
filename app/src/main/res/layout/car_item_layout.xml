@@ -27,10 +27,17 @@
             <ImageView
                 android:id="@+id/carImage_imageview"
                 android:layout_width="wrap_content"
-                android:layout_height="120dp"
+                android:layout_height="138dp"
                 android:layout_marginTop="15dp"
                 android:scaleType="fitCenter"
                 tools:src="@tools:sample/avatars" />
+
+            <ToggleButton
+                android:id="@+id/favorite_toggle_button"
+                android:layout_width="33dp"
+                android:layout_height="35dp"
+                android:background="@drawable/ic_baseline_favorite_border_24"
+                android:textColor="@android:color/transparent" />
 
         </LinearLayout>
 
@@ -66,11 +73,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <ToggleButton
-            android:id="@+id/favorite_toggle_button"
-            android:layout_width="33dp"
-            android:layout_height="35dp"
-            android:textColor="@android:color/transparent" />
     </LinearLayout>
 
 </LinearLayout>

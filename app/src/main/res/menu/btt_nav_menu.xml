@@ -3,16 +3,9 @@
 
 
     <item
-        android:id="@+id/MessageFragment"
-        android:icon="@drawable/ic_baseline_email_24"
-        android:title="Message"/>
-
-    <item
-        android:id="@+id/NotificationFragment"
-        android:icon="@drawable/ic_baseline_notifications_24"
-        android:title="Notification"/>
-
-
+        android:id="@+id/CarFragment"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Cars" />
 
     <item
         android:id="@+id/favoritFragment"
@@ -20,10 +13,14 @@
         android:title="Favorite" />
 
     <item
-        android:id="@+id/CarFragment"
-        android:icon="@drawable/ic_baseline_home_24"
-        android:title="Cars" />
+        android:id="@+id/NotificationFragment"
+        android:icon="@drawable/ic_baseline_notifications_24"
+        android:title="Notification" />
 
+    <item
+        android:id="@+id/MessageFragment"
+        android:icon="@drawable/ic_baseline_email_24"
+        android:title="Message" />
 
 
 </menu>

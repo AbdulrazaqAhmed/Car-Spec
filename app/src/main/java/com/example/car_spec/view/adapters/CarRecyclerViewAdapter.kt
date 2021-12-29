@@ -55,7 +55,7 @@ class CarRecyclerViewAdapter(val viewModel: CarsViewModel) :
         holder.date.text = item.date.toString()
         holder.price.text = "${item.price} SAR"
         holder.favoriteIcon.isChecked = item.favorite
-        holder.image.setImageBitmap()
+//        holder.image.setImageBitmap()
 
 
 //        holder.favoriteIcon.setOnClickListener() {

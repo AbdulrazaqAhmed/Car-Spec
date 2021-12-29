@@ -1,32 +1,34 @@
 package com.example.car_spec.view.viewmodel
 
+import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.LiveData
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.car_spec.model.CarModel
 import com.example.car_spec.repository.ApiServiceRepo
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.auth.User
-import com.google.firebase.firestore.core.FirestoreClient
 import com.google.firebase.firestore.ktx.toObject
-import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.io.File
 
 private lateinit var sharedpreff: SharedPreferences
 private const val TAG = "CarsViewModel"
+const val REQUEST_CODE = 200
 class CarsViewModel : ViewModel() {
     //-----------------------Repo declaration--------------
     private val apiServ = ApiServiceRepo.get()
 
     //----------------------live Data && Error Data -----------
     val carsLiveData =
-        MutableLiveData<List<CarModel>>()       //open variable to usse in car fragment observer fun
+        MutableLiveData<List<CarModel>>()       //open variable to use in car fragment observer fun
     val carsErrorLiveData =
-        MutableLiveData<List<String>>()    //open variable to usse in car fragment observer fun
+        MutableLiveData<List<String>>()    //open variable to use in car fragment observer fun
     private var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val users = firestore.collection("user")
     private val car = firestore.collection("car")
@@ -50,6 +52,26 @@ class CarsViewModel : ViewModel() {
             }
 
     }
+    fun uploadPhoto(imge: Uri) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val responseImage = apiServ.uploadImage(imge)
+                responseImage.addOnSuccessListener { taskSnapshot ->
+                    Log.d(TAG, taskSnapshot.metadata?.name.toString())
+
+
+                }.addOnFailureListener {
+                    Log.d(TAG, it.message.toString())
+                    carsErrorLiveData.postValue(listOf(it.message.toString()))
+                }
+
+            } finally {
+
+            }
+        }
+    }
+//
+
 
     fun fitch() {
         var car = mutableListOf<CarModel>()
