@@ -52,7 +52,7 @@ class ApiServiceRepo(context: Context) {
         firestore.collection("car")
             .get()
 
-
+//------------------------------file and date time--------------------------------------
     val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
 
     val now = Date()
@@ -60,16 +60,19 @@ class ApiServiceRepo(context: Context) {
     val fileName = formatter.format(now)
 
     var storageReference = FirebaseStorage.getInstance().getReference("image/$fileName")
+//---------------------------------Upload Image-----------------------------------------
 
 
     fun uploadImage(imge: Uri) =
         storageReference.child(FirebaseAuth.getInstance().uid.toString()).putFile(imge)
 
+//---------------------------------------------------------------------------------------
 
     companion object {
         private var instance: ApiServiceRepo? = null
 
         fun init(context: Context) {
+
             if (instance == null)
                 instance = ApiServiceRepo(context)
 
