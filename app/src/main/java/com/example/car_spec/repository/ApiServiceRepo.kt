@@ -6,6 +6,7 @@ import android.util.Log
 import com.example.car_spec.Api.CarApi
 import com.example.car_spec.accessablity.SHARED_PREF_FILE
 import com.example.car_spec.model.CarModel
+import com.example.car_spec.model.UsersModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
@@ -31,7 +32,7 @@ class ApiServiceRepo(context: Context) {
     private var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val users = firestore.collection("user")
     private val car = firestore.collection("car")
-    private lateinit var carRepo: ApiServiceRepo
+
 
 
 //suspend fun getCars()= users.add && user.get
@@ -41,18 +42,25 @@ class ApiServiceRepo(context: Context) {
         firestore.collection("car")
             .add(car)
 
+    fun saveUsers(users: UsersModel)=
+        firestore.collection("users")
+            .add(users)
+
+
+
     fun fitch() =
         firestore.collection("car")
             .get()
 
 
-    val formatter = SimpleDateFormat("yyyy_mm_dd_HH_mm_ss", Locale.getDefault())
+    val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
 
     val now = Date()
 
     val fileName = formatter.format(now)
 
     var storageReference = FirebaseStorage.getInstance().getReference("image/$fileName")
+
 
     fun uploadImage(imge: Uri) =
         storageReference.child(FirebaseAuth.getInstance().uid.toString()).putFile(imge)

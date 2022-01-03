@@ -14,6 +14,8 @@ import com.example.car_spec.model.CarModel
 import com.example.car_spec.repository.ApiServiceRepo
 import com.example.car_spec.view.adapters.CarRecyclerViewAdapter
 import com.example.car_spec.view.viewmodel.CarsViewModel
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class CarFragment : Fragment() {
     private var allCars = listOf<CarModel>()
@@ -31,6 +33,7 @@ class CarFragment : Fragment() {
 
         sharedpreff = requireActivity().getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
         sharedPreffEditor = sharedpreff.edit()
+
 
     }
 
@@ -55,6 +58,7 @@ class CarFragment : Fragment() {
         carViewModel.fitch()
 
 
+
     }
 
 
@@ -72,6 +76,7 @@ class CarFragment : Fragment() {
             binding.carItemRecyclerView.animate().alpha(1F)
 
 
+
         })
 
 
@@ -80,9 +85,9 @@ class CarFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         requireActivity().menuInflater.inflate(R.menu.main_menu, menu)
         val searchItem = menu.findItem(R.id.app_bar_search)
-        logoutItem = menu.findItem(R.id.logout_item)    //""
-//        logoutItem.isVisible                             //""
-//        Firebase.auth().signOut()
+        logoutItem = menu.findItem(R.id.logout_item)
+        logoutItem.isVisible
+
 
 
         val searchView =
