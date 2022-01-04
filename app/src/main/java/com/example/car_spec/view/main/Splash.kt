@@ -10,6 +10,7 @@ import android.os.CountDownTimer
 import android.util.Log
 import com.example.car_spec.MainActivity
 import com.example.car_spec.R
+import com.example.car_spec.accessablity.Login
 import com.example.car_spec.accessablity.SHARED_PREF_FILE
 import com.example.car_spec.repository.ApiServiceRepo
 
@@ -22,14 +23,7 @@ class Splash : AppCompatActivity() {
         ApiServiceRepo.init(this)
         setContentView(R.layout.activity_splash)
         sharedPref = this.getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
-        if (sharedPref.getBoolean("state", true)) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-            Log.d(TAG, sharedPref.getBoolean("state", true).toString())
-        }
 
-        val intent = Intent(this, MainActivity::class.java)
         object : CountDownTimer(2000, 3000) {
             override fun onTick(p0: Long) {
 
@@ -37,7 +31,17 @@ class Splash : AppCompatActivity() {
 
 
             override fun onFinish() {
-                startActivity(intent)
+
+                if (sharedPref.getBoolean("state", false)) {
+                    val intent = Intent(this@Splash, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    Log.d(TAG, sharedPref.getBoolean("state", true).toString())
+                }  else{
+                    val intent = Intent(applicationContext, Login::class.java)
+                    startActivity(intent)
+                    finish()
+                }
             }
 
         }.start()

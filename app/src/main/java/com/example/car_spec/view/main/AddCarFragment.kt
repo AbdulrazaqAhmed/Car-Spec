@@ -19,6 +19,8 @@ import com.example.car_spec.R
 import com.example.car_spec.databinding.FragmentAddCarBinding
 import com.example.car_spec.model.CarModel
 import com.example.car_spec.view.viewmodel.CarsViewModel
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.internal.entity.CaptureStrategy
@@ -32,7 +34,7 @@ class AddCarFragment : Fragment() {
     private val carViewModel: CarsViewModel by activityViewModels()
     private val image_Picker = 1
 
-//    val uploadImageLiveData = MutableLiveData<String>()
+    //    val uploadImageLiveData = MutableLiveData<String>()
     private lateinit var progressDialog: ProgressDialog
 
 
@@ -50,7 +52,6 @@ class AddCarFragment : Fragment() {
         return binding.root
 
 
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,13 +64,9 @@ class AddCarFragment : Fragment() {
             observer()
 
 
-
-
 //binding.addImageImageView.setOnClickListener(new View.OnClickListener() {}
         }
 //        val intent = Intent()
-
-
 
 
         binding.cancelAddButton.setOnClickListener {
@@ -111,6 +108,7 @@ class AddCarFragment : Fragment() {
 
 
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == image_Picker && resultCode == RESULT_OK) {
@@ -122,16 +120,14 @@ class AddCarFragment : Fragment() {
             carViewModel.uploadPhoto(image)
 
 
-
-
-
         }
 
 //        val imagePath = Matisse.obtainResult(data)[0]
 //
-   //  carViewModel.uploadPhoto("") //----changed from Uri to File in uploadPhoto in carViewModel---
+        //  carViewModel.uploadPhoto("") //----changed from Uri to File in uploadPhoto in carViewModel---
 
     }
+
     fun observer() {
 
         carViewModel.carsLiveData.observe(viewLifecycleOwner, {

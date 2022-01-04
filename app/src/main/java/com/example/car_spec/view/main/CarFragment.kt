@@ -1,19 +1,24 @@
 package com.example.car_spec.view.main
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.car_spec.MainActivity
 import com.example.car_spec.R
+import com.example.car_spec.accessablity.Login
 import com.example.car_spec.accessablity.SHARED_PREF_FILE
 import com.example.car_spec.databinding.FragmentCarBinding
 import com.example.car_spec.model.CarModel
 import com.example.car_spec.repository.ApiServiceRepo
+import com.example.car_spec.repository.USER_ID
 import com.example.car_spec.view.adapters.CarRecyclerViewAdapter
 import com.example.car_spec.view.viewmodel.CarsViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -53,10 +58,10 @@ class CarFragment : Fragment() {
         carAdapter = CarRecyclerViewAdapter(CarsViewModel())
         binding.carItemRecyclerView.adapter = carAdapter
 
+        setHasOptionsMenu(true)
         //
         observer()
         carViewModel.fitch()
-
 
 
     }
@@ -76,9 +81,38 @@ class CarFragment : Fragment() {
             binding.carItemRecyclerView.animate().alpha(1F)
 
 
-
         })
 
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.logout_item -> {
+                sharedPreffEditor.putBoolean("state", false)
+                sharedPreffEditor.commit()
+                logoutItem.isVisible = true
+
+                binding.progressBar4.animate().alpha(1f)
+                binding.carItemRecyclerView.animate().alpha(0f)
+                carViewModel.fitch()
+
+// type here open login
+
+
+                this?.let {
+                    val intent = Intent(it.requireActivity(), Login::class.java)
+                    it.startActivity(intent)
+                }
+
+
+
+
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
 
     }
 
@@ -86,7 +120,7 @@ class CarFragment : Fragment() {
         requireActivity().menuInflater.inflate(R.menu.main_menu, menu)
         val searchItem = menu.findItem(R.id.app_bar_search)
         logoutItem = menu.findItem(R.id.logout_item)
-        logoutItem.isVisible
+
 
 
 
