@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_carFragment_to_addCarFragment"
             app:destination="@id/addCarFragment" />
+        <action
+            android:id="@+id/action_carFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/addCarFragment"
@@ -30,4 +33,9 @@
             android:id="@+id/action_addCarFragment_to_carFragment"
             app:destination="@id/carFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.car_spec.view.main.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" />
 </navigation>

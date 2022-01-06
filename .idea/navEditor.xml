@@ -13,9 +13,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-5" />
-                            <option name="y" value="-30" />
+                            <option name="x" value="-166" />
+                            <option name="y" value="25" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_addCarFragment_to_carFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -25,8 +34,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-109" />
-                            <option name="y" value="-377" />
+                            <option name="x" value="-205" />
+                            <option name="y" value="-458" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -42,6 +51,18 @@
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="detailFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="113" />
+                            <option name="y" value="-79" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>

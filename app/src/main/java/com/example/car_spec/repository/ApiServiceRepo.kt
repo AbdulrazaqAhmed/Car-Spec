@@ -38,14 +38,19 @@ class ApiServiceRepo(context: Context) {
 
 //suspend fun getCars()= users.add && user.get
 
+//-----------------------------Users Save fun------------------------------------------
+    fun saveUsers(users: UsersModel)=
+        firestore.collection("users").document(FirebaseAuth.getInstance().uid.toString())
+            .set(users) // for get instead get
+
+    //-----------------------------Users Save fun------------------------------------------
+    fun fitchUsers()=
+        firestore.collection("users").document(FirebaseAuth.getInstance().uid.toString())
+            .get() // for get instead set is get
 //-----------------------------car collection------------------------------------
     fun save(car: CarModel) =
         firestore.collection("car")
             .add(car)
-//-----------------------------Users Save fun------------------------------------------
-    fun saveUsers(users: UsersModel)=
-        firestore.collection("users")
-            .add(users)
 
 //--------------------------------fitch fun--------------------------------------------
     fun fitch() =

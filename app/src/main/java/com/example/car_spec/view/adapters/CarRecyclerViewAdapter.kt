@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.ToggleButton
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
@@ -60,6 +61,15 @@ class CarRecyclerViewAdapter(val viewModel: CarsViewModel,val context : Context)
         Glide.with(context).load("https://firebasestorage.googleapis.com/v0/b/car-spec-9231b.appspot.com/o/image%2F2022_01_03_11_05_02%2Fnull?alt=media&token=3a27ce13-f835-4f02-be38-ee5c58392692")
             .centerCrop()
             .into(holder.image)
+
+
+        holder.itemView.setOnClickListener(){ view ->
+
+                viewModel.selectedItemMutableLiveData.postValue(item)
+                view.findNavController().navigate(R.id.action_carFragment_to_detailFragment)
+
+
+        }
 //        holder.image.setImageBitmap()
 
 

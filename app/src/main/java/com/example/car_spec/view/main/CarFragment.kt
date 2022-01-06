@@ -39,7 +39,6 @@ class CarFragment : Fragment() {
         sharedpreff = requireActivity().getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
         sharedPreffEditor = sharedpreff.edit()
 
-
     }
 
     override fun onCreateView(
@@ -55,7 +54,7 @@ class CarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        carAdapter = CarRecyclerViewAdapter(CarsViewModel(), requireActivity())
+        carAdapter = CarRecyclerViewAdapter(carViewModel, requireActivity())
         binding.carItemRecyclerView.adapter = carAdapter
 
         setHasOptionsMenu(true)
@@ -63,9 +62,7 @@ class CarFragment : Fragment() {
         observer()
         carViewModel.fitch()
 
-
     }
-
 
     // carViewModel.save("")     //calling function "save"  continue here
 

@@ -36,6 +36,8 @@ class CarsViewModel : ViewModel() {
     val uploadImageErrorLiveData = MutableLiveData<String>()
     val carsErrorLiveData =
         MutableLiveData<List<String>>()    //open variable to use in car fragment observer fun
+    val selectedCarItemFireStore : CarModel? = null// for favorite toggle button
+    val selectedItemMutableLiveData = MutableLiveData<CarModel>()
     private lateinit var usersModel : UsersModel
     private var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val users = firestore.collection("user")
