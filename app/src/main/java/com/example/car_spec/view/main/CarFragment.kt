@@ -55,7 +55,7 @@ class CarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        carAdapter = CarRecyclerViewAdapter(CarsViewModel())
+        carAdapter = CarRecyclerViewAdapter(CarsViewModel(), requireActivity())
         binding.carItemRecyclerView.adapter = carAdapter
 
         setHasOptionsMenu(true)
@@ -98,7 +98,6 @@ class CarFragment : Fragment() {
                 binding.carItemRecyclerView.animate().alpha(0f)
                 carViewModel.fitch()
 
-// type here open login
 
 
                 this?.let {

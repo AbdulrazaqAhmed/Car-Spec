@@ -19,13 +19,6 @@
         android:layout_marginBottom="10dp"
         app:srcCompat="@android:mipmap/sym_def_app_icon" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:text="Get location" />
-
     <EditText
         android:id="@+id/titleAdd_editTextText"
         android:layout_width="match_parent"
@@ -56,6 +49,15 @@
         android:hint=" model"
         android:inputType="textPersonName"
         android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/addDescription_editTextTextMultiLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Description"
+        android:inputType="textMultiLine" />
 
     <EditText
         android:id="@+id/location_addEdittext"

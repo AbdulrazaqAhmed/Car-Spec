@@ -21,6 +21,7 @@ import com.example.car_spec.model.CarModel
 import com.example.car_spec.view.viewmodel.CarsViewModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.protobuf.Empty
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.internal.entity.CaptureStrategy
@@ -70,7 +71,7 @@ class AddCarFragment : Fragment() {
 
 
         binding.cancelAddButton.setOnClickListener {
-            findNavController().navigate(R.id.CarFragment)
+            findNavController().navigate(R.id.carFragment)
 
         }
 
@@ -80,11 +81,13 @@ class AddCarFragment : Fragment() {
 
             val brandMake = binding.makeAddEditText.text.toString()
             val brandModel = binding.modelAddEdittext.text.toString()
+            val brandDescription = binding.addDescriptionEditTextTextMultiLine.text.toString()
             val brandColor = binding.colorAddEdittext.text.toString()
             val brandYear = binding.yearAddEdittext.text.toString()
             val addTitle = binding.titleAddEditTextText.text.toString()
             val addLocation = binding.locationAddEdittext.text.toString()
             val addPrice = binding.priceEditTextText.text.toString().toDouble()
+
 
 
             carViewModel.save(
@@ -99,11 +102,17 @@ class AddCarFragment : Fragment() {
                     "${Date()}",
                     addPrice,
                     true,
-                    ""
+                    "",
+                    brandDescription
+
                 )
             )
 
-
+//                try {
+//                    Log.d(TAG, "add price successfull")
+//                }catch (e:Exception){
+//                    Log.d(TAG, "add price Error")
+//                }
         }
 
 

@@ -43,7 +43,7 @@
         android:layout_marginEnd="5dp"
         android:background="@drawable/email_login"
         android:ems="10"
-        android:hint="Type Email"
+        android:hint="Type Password"
         android:inputType="textPassword"
         android:paddingLeft="8dp"
         app:layout_constraintEnd_toEndOf="parent"

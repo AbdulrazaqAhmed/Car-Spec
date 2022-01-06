@@ -1,5 +1,7 @@
 package com.example.car_spec.accessablity
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
@@ -7,6 +9,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
+import android.view.Window
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -15,6 +18,7 @@ import com.example.car_spec.MainActivity
 import com.example.car_spec.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.core.View
 import com.google.firebase.ktx.Firebase
 import java.util.regex.Pattern
 
@@ -42,6 +46,30 @@ class Login : AppCompatActivity() {
             startActivity(Intent(this, Register::class.java))
             finish()
         }
+
+        forgotPass.setOnClickListener() {
+
+            val dialog = Dialog(this)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setCancelable(false)
+            dialog.setContentView(R.layout.resetpassword_dialog)
+            val titleText = dialog.findViewById(R.id.reset_password_textView) as TextView
+
+            val email: EditText = dialog.findViewById(R.id.email_R_editText)
+            titleText.text = title
+            val yesBtn = dialog.findViewById(R.id.resetPass_button) as Button
+            val noBtn = dialog.findViewById(R.id.cancelReset_button) as Button
+            yesBtn.setOnClickListener {
+                forgotenPass(email.text.toString())
+
+
+            }
+            noBtn.setOnClickListener { dialog.dismiss() }
+            dialog.show()
+
+        }
+
+
 
         logButton.setOnClickListener {
             val emailLog: String = logEmail.text.toString()
@@ -78,32 +106,30 @@ class Login : AppCompatActivity() {
 
         }
 
-        forgotPass.setOnClickListener() {
-            if (logEmail.text.toString().isEmpty()) {
-                return@setOnClickListener
-
-            } else if (!Patterns.EMAIL_ADDRESS.matcher(logEmail.text.toString()).matches()) {
-                return@setOnClickListener
-            }
-            Firebase.auth.sendPasswordResetEmail(logEmail.text.toString())
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(this, "Email sent successfully", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(
-                            this,
-                            task.exception!!.message.toString(),
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-                    }
-                }
-
-        }
-
     }
 
+    fun forgotenPass(email: String) {
 
+//        if (logEmail.text.toString().isEmpty()) {
+//            return
+//
+//        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+//            return
+//        }
+        Firebase.auth.sendPasswordResetEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Email sent successfully", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(
+                        this,
+                        task.exception!!.message.toString(),
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+            }
+    }
 }
 
 

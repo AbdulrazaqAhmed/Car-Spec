@@ -1,5 +1,6 @@
 package com.example.car_spec.view.adapters
 
+import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +10,13 @@ import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import com.bumptech.glide.Glide
 import com.example.car_spec.R
 import com.example.car_spec.model.CarModel
 import com.example.car_spec.view.viewmodel.CarsViewModel
 
 
-class CarRecyclerViewAdapter(val viewModel: CarsViewModel) :
+class CarRecyclerViewAdapter(val viewModel: CarsViewModel,val context : Context) :
     RecyclerView.Adapter<CarRecyclerViewAdapter.CarViewHolder>() {
 
 
@@ -55,6 +57,9 @@ class CarRecyclerViewAdapter(val viewModel: CarsViewModel) :
         holder.date.text = item.date.toString()
         holder.price.text = "${item.price} SAR"
         holder.favoriteIcon.isChecked = item.favorite
+        Glide.with(context).load("https://firebasestorage.googleapis.com/v0/b/car-spec-9231b.appspot.com/o/image%2F2022_01_03_11_05_02%2Fnull?alt=media&token=3a27ce13-f835-4f02-be38-ee5c58392692")
+            .centerCrop()
+            .into(holder.image)
 //        holder.image.setImageBitmap()
 
 

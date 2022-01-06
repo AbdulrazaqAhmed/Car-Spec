@@ -3,7 +3,7 @@
 
 
     <item
-        android:id="@+id/CarFragment"
+        android:id="@+id/carFragment"
         android:icon="@drawable/ic_baseline_home_24"
         android:title="Cars" />
 

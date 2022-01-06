@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.car_spec.databinding.ActivityMainBinding
@@ -41,7 +42,6 @@ class MainActivity : AppCompatActivity() {
 //        replacementFragment()
 
 
-
 //        binding.bottomNavigationView.setOnItemSelectedListener {
 //            when (it.itemId) {
 //                R.id.carFragment -> replacementFragment(FavoritFragment)
@@ -50,7 +50,6 @@ class MainActivity : AppCompatActivity() {
 //            }
 //
 //        }
-
 
 
 
@@ -82,10 +81,13 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView4) as NavHostFragment
         navController = navHostFragment.navController
 
-        setupActionBarWithNavController(navController)
 
 
 
+//        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
+//        val appBartitle = AppBarConfiguration(setOf(R.id.carFragment, R.id.favoritFragment,R.id.NotificationFragment,R.id.MessageFragment))
+//        setupActionBarWithNavController(navController, appBartitle)
+//
 
     }
 
