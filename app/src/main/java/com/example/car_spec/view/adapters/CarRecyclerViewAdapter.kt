@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.example.car_spec.R
 import com.example.car_spec.model.CarModel
 import com.example.car_spec.view.viewmodel.CarsViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 
 class CarRecyclerViewAdapter(val viewModel: CarsViewModel,val context : Context) :
@@ -57,8 +58,8 @@ class CarRecyclerViewAdapter(val viewModel: CarsViewModel,val context : Context)
         holder.location.text = item.location
         holder.date.text = item.date.toString()
         holder.price.text = "${item.price} SAR"
-        holder.favoriteIcon.isChecked = item.favorite
-        Glide.with(context).load("https://firebasestorage.googleapis.com/v0/b/car-spec-9231b.appspot.com/o/image%2F2022_01_03_11_05_02%2Fnull?alt=media&token=3a27ce13-f835-4f02-be38-ee5c58392692")
+//        holder.favoriteIcon.isChecked = item.favorite
+        Glide.with(context).load("https://firebasestorage.googleapis.com/v0/b/car-spec-9231b.appspot.com/o/image%2F${FirebaseAuth.getInstance().uid}?alt=media&token=787746ff-b858-49c6-91d4-218d775195b3")
             .centerCrop()
             .into(holder.image)
 
@@ -98,7 +99,7 @@ class CarRecyclerViewAdapter(val viewModel: CarsViewModel,val context : Context)
         val date: TextView = itemView.findViewById(R.id.dateCreated_textView)
         val price: TextView = itemView.findViewById(R.id.price_textView)
         val image : ImageView = itemView.findViewById(R.id.carImage_imageview)
-        val favoriteIcon: ToggleButton = itemView.findViewById(R.id.favorite_toggle_button)
+//        val favoriteIcon: ToggleButton = itemView.findViewById(R.id.favorite_toggle_button)
 
     }
 }

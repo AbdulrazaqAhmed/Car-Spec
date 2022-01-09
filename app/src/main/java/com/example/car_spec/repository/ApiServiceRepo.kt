@@ -64,7 +64,7 @@ class ApiServiceRepo(context: Context) {
 
     val fileName = formatter.format(now)
 
-    var storageReference = FirebaseStorage.getInstance().getReference("image/$fileName")
+    var storageReference = FirebaseStorage.getInstance().getReference("image")
 //---------------------------------Upload Image Fun-----------------------------------------
 
 

@@ -19,6 +19,7 @@ import com.example.car_spec.R
 import com.example.car_spec.databinding.FragmentAddCarBinding
 import com.example.car_spec.model.CarModel
 import com.example.car_spec.view.viewmodel.CarsViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.protobuf.Empty
@@ -87,6 +88,7 @@ class AddCarFragment : Fragment() {
             val addTitle = binding.titleAddEditTextText.text.toString()
             val addLocation = binding.locationAddEdittext.text.toString()
             val addPrice = binding.priceEditTextText.text.toString().toDouble()
+            val userIdProfile = FirebaseAuth.getInstance().uid
 
 
 
@@ -103,7 +105,9 @@ class AddCarFragment : Fragment() {
                     addPrice,
                     true,
                     "",
-                    brandDescription
+                    brandDescription,
+                    userIdProfile!!
+
 
                 )
             )
@@ -143,13 +147,14 @@ class AddCarFragment : Fragment() {
             Log.d("mainAc", it.toString())
 
             Glide.with(this).load("").into(binding.addImageImageView)
-            carViewModel.uploadImageLiveData.observe(viewLifecycleOwner, {
-                if (progressDialog.isShowing) progressDialog.dismiss()
-            })
+
 
 
         })
 
+        carViewModel.uploadImageLiveData.observe(viewLifecycleOwner, {
+            if (progressDialog.isShowing) progressDialog.dismiss()
+        })
 
     }
 

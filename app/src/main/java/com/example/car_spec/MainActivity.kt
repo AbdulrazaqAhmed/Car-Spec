@@ -39,15 +39,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        replacementFragment()
+//        replacementFragment(favoriteFragment)
 
 
 //        binding.bottomNavigationView.setOnItemSelectedListener {
 //            when (it.itemId) {
-//                R.id.carFragment -> replacementFragment(FavoritFragment)
+//                R.id.carFragment -> replacementFragment(carFragment)
+//                R.id.favoritFragment -> replacementFragment(addCarFragment)
 //
-//                else -> {return}
+////                else -> {return}
 //            }
+//            true
 //
 //        }
 
@@ -91,9 +93,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp()
-    }
+//    override fun onSupportNavigateUp(): Boolean {
+//        return navController.navigateUp()
+//    }
 //    private fun replacementFragment(fragment : Fragment){
 //        if (fragment != null){
 //            val transaction = supportFragmentManager.beginTransaction()
