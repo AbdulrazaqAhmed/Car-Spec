@@ -52,11 +52,20 @@ class CarsViewModel : ViewModel() {
     }
 
 
-    fun save(car: CarModel) {
+    fun save(car: CarModel, uri: Uri) {
         apiServ.save(car)
+
             .addOnSuccessListener {
                 Log.d("Firebase", "Document saved")
+                var documentId = it.id
+                Log.d(TAG, documentId)
 
+                val time: String? = Calendar.getInstance().getTime().toString()
+                val imagename = documentId + "_" + FirebaseAuth.getInstance().uid.toString() + "_" + time + "/"
+                uploadPhoto(uri, imagename)
+
+                // updating the document with Image Name
+                //
 
             }
 
@@ -64,15 +73,10 @@ class CarsViewModel : ViewModel() {
                 Log.d("Firebase", "save Failed ")
 
             }
-
     }
 
 
-    fun uploadPhoto(imge: Uri) {
-        val time: String? = Calendar.getInstance().getTime().toString()
-        val imagename =
-            "/documentId_" + FirebaseAuth.getInstance().uid.toString() + "_" + time + "/"
-
+    fun uploadPhoto(imge: Uri, imagename: String) {
 
         apiServ.storageCarReference
 

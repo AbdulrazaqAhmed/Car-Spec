@@ -64,7 +64,7 @@ class ApiServiceRepo(context: Context) {
 //    val storageRef = storageCarReference.child("/documentId_" + FirebaseAuth.getInstance().uid.toString() + "_" + time + "/") //put in variable
 
     fun uploadImage(imge: Uri, imageName: String) =
-        storageCarReference.child("/documentId_" + FirebaseAuth.getInstance().uid.toString() + "_" + time + "/").putFile(imge)
+        storageCarReference.child(imageName).putFile(imge)
 
     //--------------------------------fitch fun--------------------------------------------
     fun fitch() =

@@ -60,6 +60,7 @@ class CarFragment : Fragment() {
         carAdapter = CarRecyclerViewAdapter(carViewModel, requireActivity())
         binding.carItemRecyclerView.adapter = carAdapter
 
+
         setHasOptionsMenu(true)
         //
         observer()
@@ -79,6 +80,7 @@ class CarFragment : Fragment() {
             allCars = it
             carAdapter.submitList(it)
             binding.carItemRecyclerView.animate().alpha(1F)
+
 
 
         })

@@ -11,10 +11,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.car_spec.R
 import com.example.car_spec.databinding.FragmentAddCarBinding
 import com.example.car_spec.model.CarModel
@@ -35,6 +37,7 @@ class AddCarFragment : Fragment() {
     private lateinit var binding: FragmentAddCarBinding
     private val carViewModel: CarsViewModel by activityViewModels()
     private val image_Picker = 1
+    private lateinit var uri : Uri
 
     //    val uploadImageLiveData = MutableLiveData<String>()
     private lateinit var progressDialog: ProgressDialog
@@ -65,6 +68,7 @@ class AddCarFragment : Fragment() {
             showImagePicker()
 
             observer()
+            bindSelectedImage()
 
 
 //binding.addImageImageView.setOnClickListener(new View.OnClickListener() {}
@@ -90,8 +94,7 @@ class AddCarFragment : Fragment() {
             val addLocation = binding.locationAddEdittext.text.toString()
             val addPrice = binding.priceEditTextText.text.toString().toDouble()
             val userIdProfile = FirebaseAuth.getInstance().uid
-
-
+            val uri :Uri = "null".toUri()
 
             carViewModel.save(
                 CarModel(
@@ -105,12 +108,12 @@ class AddCarFragment : Fragment() {
                     "${Date()}",
                     addPrice,
                     true,
-                    "",
+                    "uri",
                     brandDescription,
                     userIdProfile!!
 
 
-                )
+                ), uri
             )
 
 //                try {
@@ -131,8 +134,11 @@ class AddCarFragment : Fragment() {
             var image = Matisse.obtainResult(data)[0]
 
             Log.d(TAG, "onActivityResult: image uri ")
-            val imageName = FirebaseAuth.getInstance().uid
-            carViewModel.uploadPhoto(image)
+//            val imageName = FirebaseAuth.getInstance().uid
+
+
+
+            carViewModel.save(CarModel(), image)
 
 
 
@@ -167,6 +173,17 @@ class AddCarFragment : Fragment() {
 //        intent.action = Intent.ACTION_GET_CONTENT
 //
 //    }
+
+    fun bindSelectedImage()
+    {
+        var imagePath =
+            "https://firebasestorage.googleapis.com/v0/b/car-spec-9231b.appspot.com/o/profile%20images%2F${FirebaseAuth.getInstance().uid}?alt=media&token=787746ff-b858-49c6-91d4-218d775195b3"
+
+        Glide.with(this).load(imagePath)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
+            .placeholder(R.drawable.uploadimages).into(binding.addImageImageView)
+    }
 
     fun showImagePicker() {
         Matisse.from(this)
