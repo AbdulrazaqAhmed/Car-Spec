@@ -14,7 +14,7 @@
         android:layout_marginTop="32dp"
         android:gravity="center"
         android:text="TextView"
-        android:textSize="18sp"
+        android:textSize="27sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,6 +36,7 @@
         android:layout_height="49dp"
         android:layout_marginTop="16dp"
         android:text="TextView"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,10 +47,26 @@
         android:layout_width="128dp"
         android:layout_height="46dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detailDescription_textView" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="message"
+        tools:layout_editor_absoluteX="239dp"
+        tools:layout_editor_absoluteY="500dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="favorite"
+        tools:layout_editor_absoluteX="70dp"
+        tools:layout_editor_absoluteY="500dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

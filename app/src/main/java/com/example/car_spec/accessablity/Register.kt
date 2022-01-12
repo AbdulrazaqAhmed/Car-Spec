@@ -46,7 +46,7 @@ class Register : AppCompatActivity() {
                         if (task.isSuccessful) {
                             val firebaseUser: FirebaseUser = task.result!!.user!!
 
-                            val user = UsersModel(emailReg, firstNameReg, lastNameReg)
+                            val user = UsersModel(emailReg, firstNameReg, lastNameReg, firebaseUser.uid)
                             usersViewModel.saveUsers(user)
 
                             Toast.makeText(this, "Registerd successfully", Toast.LENGTH_SHORT)

@@ -40,6 +40,7 @@ class AddCarFragment : Fragment() {
     private lateinit var progressDialog: ProgressDialog
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -130,7 +131,9 @@ class AddCarFragment : Fragment() {
             var image = Matisse.obtainResult(data)[0]
 
             Log.d(TAG, "onActivityResult: image uri ")
+            val imageName = FirebaseAuth.getInstance().uid
             carViewModel.uploadPhoto(image)
+
 
 
         }
@@ -151,7 +154,6 @@ class AddCarFragment : Fragment() {
 
 
         })
-
         carViewModel.uploadImageLiveData.observe(viewLifecycleOwner, {
             if (progressDialog.isShowing) progressDialog.dismiss()
         })

@@ -11,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.car_spec.model.CarModel
 import com.example.car_spec.model.UsersModel
 import com.example.car_spec.repository.ApiServiceRepo
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.ktx.toObject
@@ -18,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
 import java.lang.Exception
+import java.util.*
 
 //private val imageUri : Uri? = null
 private lateinit var sharedpreff: SharedPreferences
@@ -28,6 +30,7 @@ const val REQUEST_CODE = 200
 class CarsViewModel : ViewModel() {
     //-----------------------Repo declaration--------------
     private val apiServ = ApiServiceRepo.get()
+    private val storCarRef = apiServ.storageCarReference
 
     //----------------------live Data && Error Data -----------
     val carsLiveData =
@@ -36,9 +39,9 @@ class CarsViewModel : ViewModel() {
     val uploadImageErrorLiveData = MutableLiveData<String>()
     val carsErrorLiveData =
         MutableLiveData<List<String>>()    //open variable to use in car fragment observer fun
-    val selectedCarItemFireStore : CarModel? = null// for favorite toggle button
+    val selectedCarItemFireStore: CarModel? = null// for favorite toggle button
     val selectedItemMutableLiveData = MutableLiveData<CarModel>()
-    private lateinit var usersModel : UsersModel
+    private lateinit var usersModel: UsersModel
     private var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val users = firestore.collection("user")
     private val car = firestore.collection("car")
@@ -66,19 +69,27 @@ class CarsViewModel : ViewModel() {
 
 
     fun uploadPhoto(imge: Uri) {
+        val time: String? = Calendar.getInstance().getTime().toString()
+        val imagename =
+            "/documentId_" + FirebaseAuth.getInstance().uid.toString() + "_" + time + "/"
+
+
+        apiServ.storageCarReference
+
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val responseImage = apiServ.uploadImage(imge)
+                val responseImage = apiServ.uploadImage(imge, imagename)
 
                 responseImage.addOnSuccessListener { taskSnapshot ->
 
                     Log.d(TAG, taskSnapshot.metadata?.name.toString())
+
                     if (responseImage.isSuccessful) {
                         uploadImageLiveData.postValue("successful")
                     } else {
 
                         uploadImageErrorLiveData.postValue("")
-                        Log.d(TAG,"exception, uploadImageErrorLiveData ")
+                        Log.d(TAG, "exception, uploadImageErrorLiveData ")
                     }
 
                 }.addOnFailureListener {
@@ -95,8 +106,6 @@ class CarsViewModel : ViewModel() {
     }
 
 
-
-
     fun fitch() {
         var car = mutableListOf<CarModel>()
 //        val docRef = firestore.collection("cars").orderBy("Title", Query.Direction.ASCENDING)
@@ -111,11 +120,7 @@ class CarsViewModel : ViewModel() {
 
                     //    car.add(Gson().fromJson(document.data.toString(),CarModel::class.java))
                     //                car.add(Gson().fromJson(document.data.toString(),CarModel::class.java))
-
                     car.add(document.toObject<CarModel>())
-
-
-
                 }
                 carsLiveData.postValue(car)
                 // type observer

@@ -59,7 +59,7 @@ class CarRecyclerViewAdapter(val viewModel: CarsViewModel,val context : Context)
         holder.date.text = item.date.toString()
         holder.price.text = "${item.price} SAR"
 //        holder.favoriteIcon.isChecked = item.favorite
-        Glide.with(context).load("https://firebasestorage.googleapis.com/v0/b/car-spec-9231b.appspot.com/o/image%2F${FirebaseAuth.getInstance().uid}?alt=media&token=787746ff-b858-49c6-91d4-218d775195b3")
+        Glide.with(context).load("https://firebasestorage.googleapis.com/v0/b/car-spec-9231b.appspot.com/o/image%2F${item.image}?alt=media&token=787746ff-b858-49c6-91d4-218d775195b3")
             .centerCrop()
             .into(holder.image)
 

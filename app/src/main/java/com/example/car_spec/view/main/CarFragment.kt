@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.car_spec.MainActivity
 import com.example.car_spec.R
 import com.example.car_spec.accessablity.Login
@@ -30,6 +31,8 @@ class CarFragment : Fragment() {
     private lateinit var sharedpreff: SharedPreferences
     private lateinit var sharedPreffEditor: SharedPreferences.Editor
     private lateinit var logoutItem: MenuItem
+    private lateinit var userProfileItem: MenuItem
+
     private lateinit var carRepo: ApiServiceRepo
 
 
@@ -90,7 +93,6 @@ class CarFragment : Fragment() {
                 sharedPreffEditor.putBoolean("state", false)
                 sharedPreffEditor.commit()
                 logoutItem.isVisible = true
-
                 binding.progressBar4.animate().alpha(1f)
                 binding.carItemRecyclerView.animate().alpha(0f)
                 carViewModel.fitch()
@@ -103,9 +105,17 @@ class CarFragment : Fragment() {
                 }
 
 
-
+            }
+            R.id.profile_item -> {
+                findNavController().navigate(R.id.action_carFragment_to_profileFragment)
 
             }
+            R.id.addFragment -> {
+                findNavController().navigate(R.id.action_carFragment_to_addCarFragment)
+
+            }
+
+
         }
 
         return super.onOptionsItemSelected(item)
@@ -116,8 +126,7 @@ class CarFragment : Fragment() {
         requireActivity().menuInflater.inflate(R.menu.main_menu, menu)
         val searchItem = menu.findItem(R.id.app_bar_search)
         logoutItem = menu.findItem(R.id.logout_item)
-
-
+        userProfileItem = menu.findItem(R.id.profile_item)
 
 
         val searchView =

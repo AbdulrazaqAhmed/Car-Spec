@@ -6,6 +6,12 @@
         android:id="@+id/logout_item"
         android:title="logout" />
     <item
+        android:id="@+id/profile_item"
+        android:title="profile"/>
+    <item
+        android:id="@+id/addFragment"
+        android:title="Add Car"/>
+    <item
         android:id="@+id/app_bar_search"
         android:icon="@drawable/ic_baseline_search_24"
         android:title="search"
