@@ -34,14 +34,15 @@ import kotlin.math.log
 
 
 class AddCarFragment : Fragment() {
+
+    private lateinit var imagePath: String
     private lateinit var binding: FragmentAddCarBinding
     private val carViewModel: CarsViewModel by activityViewModels()
     private val image_Picker = 1
-    private lateinit var uri : Uri
+    private lateinit var uri: Uri
 
     //    val uploadImageLiveData = MutableLiveData<String>()
     private lateinit var progressDialog: ProgressDialog
-
 
 
     override fun onCreateView(
@@ -94,7 +95,7 @@ class AddCarFragment : Fragment() {
             val addLocation = binding.locationAddEdittext.text.toString()
             val addPrice = binding.priceEditTextText.text.toString().toDouble()
             val userIdProfile = FirebaseAuth.getInstance().uid
-            val uri :Uri = "null".toUri()
+            val uri: Uri = "null".toUri()
 
             carViewModel.save(
                 CarModel(
@@ -137,9 +138,7 @@ class AddCarFragment : Fragment() {
 //            val imageName = FirebaseAuth.getInstance().uid
 
 
-
             carViewModel.save(CarModel(), image)
-
 
 
         }
@@ -158,9 +157,9 @@ class AddCarFragment : Fragment() {
             Glide.with(this).load("").into(binding.addImageImageView)
 
 
-
         })
         carViewModel.uploadImageLiveData.observe(viewLifecycleOwner, {
+            bindSelectedImage()
             if (progressDialog.isShowing) progressDialog.dismiss()
         })
 
@@ -174,11 +173,9 @@ class AddCarFragment : Fragment() {
 //
 //    }
 
-    fun bindSelectedImage()
-    {
-        var imagePath =
-            "https://firebasestorage.googleapis.com/v0/b/car-spec-9231b.appspot.com/o/profile%20images%2F${FirebaseAuth.getInstance().uid}?alt=media&token=787746ff-b858-49c6-91d4-218d775195b3"
-
+    fun bindSelectedImage() {
+        imagePath =
+            "https://firebasestorage.googleapis.com/v0/b/car-spec-9231b.appspot.com/o/image%2FC12RN34ZvOPUsi7EIeli_PUP8Favcr5M6xTuSHm0RGq3sg0k1_2022-01-13%2014%3A15%3A57%3A847?alt=media&token=09720aeb-7236-4349-b356-81119ca99571"
         Glide.with(this).load(imagePath)
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .skipMemoryCache(true)

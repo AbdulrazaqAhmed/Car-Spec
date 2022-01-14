@@ -19,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
 import java.lang.Exception
+import java.text.SimpleDateFormat
 import java.util.*
 
 //private val imageUri : Uri? = null
@@ -59,10 +60,13 @@ class CarsViewModel : ViewModel() {
                 Log.d("Firebase", "Document saved")
                 var documentId = it.id
                 Log.d(TAG, documentId)
-
-                val time: String? = Calendar.getInstance().getTime().toString()
+                val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss:sss", Locale.getDefault())
+//                val now = Date()
+                val time = formatter.format(Date())
                 val imagename = documentId + "_" + FirebaseAuth.getInstance().uid.toString() + "_" + time + "/"
+
                 uploadPhoto(uri, imagename)
+                Log.d(TAG, "File Name")
 
                 // updating the document with Image Name
                 //
@@ -77,8 +81,6 @@ class CarsViewModel : ViewModel() {
 
 
     fun uploadPhoto(imge: Uri, imagename: String) {
-
-        apiServ.storageCarReference
 
         viewModelScope.launch(Dispatchers.IO) {
             try {

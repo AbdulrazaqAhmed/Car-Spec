@@ -27,6 +27,7 @@ const val USER_ID = "USER_ID"
 class ApiServiceRepo(context: Context) {
 
     //car firebase to get instance
+     val  storageCarReference = FirebaseStorage.getInstance().getReference("image")
     private val sharedPreferences =
         context.getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
     private val userId = sharedPreferences.getString(USER_ID, "")
@@ -57,14 +58,14 @@ class ApiServiceRepo(context: Context) {
             .add(car)
 
     //---------------------------------Upload Car Image Fun-----------------------------------------
-    var storageCarReference = FirebaseStorage.getInstance().getReference("image")
+
 
 
     val time: String? = Calendar.getInstance().getTime().toString()
 //    val storageRef = storageCarReference.child("/documentId_" + FirebaseAuth.getInstance().uid.toString() + "_" + time + "/") //put in variable
 
-    fun uploadImage(imge: Uri, imageName: String) =
-        storageCarReference.child(imageName).putFile(imge)
+    fun uploadImage(imge: Uri, imagename: String) =
+        storageCarReference.child(imagename).putFile(imge)
 
     //--------------------------------fitch fun--------------------------------------------
     fun fitch() =

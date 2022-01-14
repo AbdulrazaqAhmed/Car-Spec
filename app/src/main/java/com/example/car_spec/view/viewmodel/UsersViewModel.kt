@@ -53,7 +53,8 @@ val userId = FirebaseAuth.getInstance().uid
             .addOnSuccessListener {
                 Log.d(TAG, "Firebase: Users Document fetched")
 
-                var user = it.documents[0].toObject(UsersModel::class.java)
+                var user = it.documents[0].toObject(UsersModel::class.java)// make sure of user have id
+                Log.d(TAG, user.toString())
                 usersLiveData.postValue(user!!)
             }
     }

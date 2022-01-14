@@ -49,6 +49,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observer()
+
         userViewModel.fetchUsers()
         showPic()
 
@@ -56,6 +57,7 @@ class ProfileFragment : Fragment() {
         binding.profilePicImageView.setOnClickListener {
 
             showUserImagePicker()
+
 
 //binding.addImageImageView.setOnClickListener(new View.OnClickListener() {}
         }
