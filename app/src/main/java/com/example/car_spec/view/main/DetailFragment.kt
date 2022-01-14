@@ -44,21 +44,28 @@ class DetailFragment : Fragment() {
             Log.d("FragmentDetailLog", it.toString())
             it?.let { Car ->
                 //
-                var imagePath = "https://firebasestorage.googleapis.com/v0/b/car-spec-9231b.appspot.com/o/image%2F${FirebaseAuth.getInstance().uid}?alt=media&token=787746ff-b858-49c6-91d4-218d775195b3"
+                var imagePath =
+                    "https://firebasestorage.googleapis.com/v0/b/car-spec-9231b.appspot.com/o/image%2F${FirebaseAuth.getInstance().uid}?alt=media&token=787746ff-b858-49c6-91d4-218d775195b3"
                 binding.titleDetailTextView.text = Car.title
                 Glide.with(this)
                     .load(imagePath)
                     .into(binding.photoDetailsImageView)
 
-            binding.detailDescriptionTextView.text = Car.description
-            binding.detailCarPriceTextview.text = Car.price.toString()
+                binding.detailDescriptionTextView.text = Car.description
+                binding.detailCarPriceTextview.text = Car.price.toString()
+                binding.detailMakeTextView.text = Car.make
+                binding.detailModelTextview.text= Car.model
+                binding.detailLocationTextView.text = Car.location
+                binding.detailColorTextview.text= Car.color
+                binding.detailYearTextView.text = Car.year
+
 
 
 //                val specificItem = carViewModel.selectedCarItemFireStore
 //                specificItem?.let {
 //                    binding.
 //                }
-        }
-    })
-}
+            }
+        })
+    }
 }
