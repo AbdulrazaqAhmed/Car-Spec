@@ -1,118 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="5dp"
-    android:layout_marginTop="60dp"
-    android:orientation="vertical"
-    android:paddingTop="60dp"
-    tools:context=".view.main.AddCarFragment">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/add_Image_imageView"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        app:srcCompat="@android:mipmap/sym_def_app_icon" />
+        android:layout_margin="10dp"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/titleAdd_editTextText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:ems="10"
-        android:hint=" title"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
+        <ImageView
+            android:id="@+id/add_Image_imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:srcCompat="@android:mipmap/sym_def_app_icon" />
 
-    <EditText
-        android:id="@+id/make_addEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:ems="10"
-        android:hint=" make"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
 
-    <EditText
-        android:id="@+id/model_addEdittext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:ems="10"
-        android:hint=" model"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
+        <EditText
+            android:id="@+id/titleAdd_editTextText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:ems="10"
+            android:hint=" title"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
 
-    <EditText
-        android:id="@+id/addDescription_editTextTextMultiLine"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Description"
-        android:inputType="textMultiLine" />
+        <EditText
+            android:id="@+id/make_addEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:ems="10"
+            android:hint=" make"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
 
-    <EditText
-        android:id="@+id/location_addEdittext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:ems="10"
-        android:hint=" location"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
 
-    <EditText
-        android:id="@+id/year_addEdittext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:ems="10"
-        android:hint="year"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
+        <EditText
+            android:id="@+id/model_addEdittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:ems="10"
+            android:hint=" model"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
 
-    <EditText
-        android:id="@+id/color_addEdittext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:ems="10"
-        android:hint="color"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
+        <EditText
+            android:id="@+id/location_addEdittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:ems="10"
+            android:hint=" location"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
 
-    <EditText
-        android:id="@+id/price_editTextText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="price"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
 
-    <Button
-        android:id="@+id/saveAdd_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        app:cornerRadius="22dp" />
+        <EditText
+            android:id="@+id/price_editTextText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="price"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
 
-    <Button
-        android:id="@+id/cancelAdd_Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cancel"
-        app:cornerRadius="22dp" />
+        <EditText
+            android:id="@+id/year_addEdittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:ems="10"
+            android:hint="year"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/color_addEdittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:ems="10"
+            android:hint="color"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/addDescription_editTextTextMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Description"
+            android:inputType="textMultiLine"
+            tools:ignore="TouchTargetSizeCheck" />
+
+
+        <Button
+            android:id="@+id/saveAdd_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            app:cornerRadius="22dp" />
+
+        <Button
+            android:id="@+id/cancelAdd_Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="Cancel"
+            app:cornerRadius="22dp" />
+    </LinearLayout>
+
+</ScrollView>

@@ -15,10 +15,9 @@ data class CarModel(
     val id: Int = 0,
     val date: String = "",
     val price: Double = 0.0,
-    val favorite: Boolean = false,
+    val favorite: Boolean = true,
     val image: String = "",
     val description: String = "",
     val userId: String = ""
-
 
 )

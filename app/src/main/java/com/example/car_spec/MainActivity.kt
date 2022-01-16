@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.media.Ringtone
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -31,7 +32,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
     private  var favoriteFragment= FavoritFragment()
-    private  var addCarFragment = AddCarFragment()
     private  var carFragment = CarFragment()
 
 
@@ -39,19 +39,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        replacementFragment(favoriteFragment)
+        replacementFragment(carFragment)
 
 
-//        binding.bottomNavigationView.setOnItemSelectedListener {
-//            when (it.itemId) {
-//                R.id.carFragment -> replacementFragment(carFragment)
-//                R.id.favoritFragment -> replacementFragment(addCarFragment)
-//
-////                else -> {return}
-//            }
-//            true
-//
-//        }
+        binding.bottomNavigationView.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.carFragment -> replacementFragment(carFragment)
+                R.id.favoritFragment -> replacementFragment(favoriteFragment)
+
+
+//                else -> {return}
+            }
+            true
+
+        }
 
 
 
@@ -93,15 +94,18 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//    override fun onSupportNavigateUp(): Boolean {
-//        return navController.navigateUp()
-//    }
-//    private fun replacementFragment(fragment : Fragment){
-//        if (fragment != null){
-//            val transaction = supportFragmentManager.beginTransaction()
-//            transaction.replace(R.id.fragmentContainerView4, fragment)
-//        }
-//
-//    }
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp()
+
+    }
+    private fun replacementFragment(fragment : Fragment) {
+
+
+        if (fragment != null) {
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragmentContainerView4, fragment)
+        }
+    }
+
 }
 

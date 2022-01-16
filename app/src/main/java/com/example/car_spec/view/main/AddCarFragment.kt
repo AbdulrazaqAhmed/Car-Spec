@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
@@ -30,16 +31,20 @@ import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.internal.entity.CaptureStrategy
 import java.io.File
 import java.util.*
+import java.util.concurrent.ThreadLocalRandom
 import kotlin.math.log
+import kotlin.streams.asSequence
 
-
+const val STRING_LENGTH = 10;
+const val ALPHANUMERIC_REGEX = "[a-zA-Z0-9]+"
 class AddCarFragment : Fragment() {
-
+    private val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
     private lateinit var imagePath: String
     private lateinit var binding: FragmentAddCarBinding
     private val carViewModel: CarsViewModel by activityViewModels()
     private val image_Picker = 1
-    private lateinit var uri: Uri
+    private lateinit var image: Uri
+
 
     //    val uploadImageLiveData = MutableLiveData<String>()
     private lateinit var progressDialog: ProgressDialog
@@ -96,6 +101,11 @@ class AddCarFragment : Fragment() {
             val addPrice = binding.priceEditTextText.text.toString().toDouble()
             val userIdProfile = FirebaseAuth.getInstance().uid
             val uri: Uri = "null".toUri()
+            val randomString = ThreadLocalRandom.current()
+                .ints(STRING_LENGTH.toLong(), 0, charPool.size)
+                .asSequence()
+                .map(charPool::get)
+                .joinToString("")
 
             carViewModel.save(
                 CarModel(
@@ -109,13 +119,17 @@ class AddCarFragment : Fragment() {
                     "${Date()}",
                     addPrice,
                     true,
-                    "uri",
+                    randomString,
                     brandDescription,
                     userIdProfile!!
 
 
-                ), uri
+                ), image
             )
+            observer()
+            bindSelectedImage()
+            findNavController().navigate(R.id.carFragment)
+            Toast.makeText(context, "Information Added Successfully", Toast.LENGTH_SHORT).show()
 
 //                try {
 //                    Log.d(TAG, "add price successfull")
@@ -132,13 +146,20 @@ class AddCarFragment : Fragment() {
         if (requestCode == image_Picker && resultCode == RESULT_OK) {
 //            var imageUri = data!!.data
             progressDialog.show()
-            var image = Matisse.obtainResult(data)[0]
+             image = Matisse.obtainResult(data)[0]
 
             Log.d(TAG, "onActivityResult: image uri ")
 //            val imageName = FirebaseAuth.getInstance().uid
 
+            Glide.with(this).load(image)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .placeholder(R.drawable.uploadimages).into(binding.addImageImageView)
+            if (progressDialog.isShowing) progressDialog.dismiss()
 
-            carViewModel.save(CarModel(), image)
+//            carViewModel.save(CarModel(), image)
+
+
 
 
         }

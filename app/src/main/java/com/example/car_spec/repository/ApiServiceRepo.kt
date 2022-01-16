@@ -34,15 +34,20 @@ class ApiServiceRepo(context: Context) {
     private var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val users = Firebase.firestore.collection("user")
     private val car = Firebase.firestore.collection("car")
-
+    var storageProfileReference = FirebaseStorage.getInstance().getReference("profile images")
 
     //-----------------------------Users Save fun------------------------------------------
     fun saveUsers(users: UsersModel) =
         firestore.collection("users").document(FirebaseAuth.getInstance().uid.toString())
             .set(users) // for get instead get
+//---------------------------------update users info -----------------------------------------
+    fun updateUsers(users: UsersModel)=
+        firestore.collection("users").document(FirebaseAuth.getInstance().uid.toString())
+            .set(users)
 
-    var storageProfileReference = FirebaseStorage.getInstance().getReference("profile images")
 
+
+//____________________________---- upload profile image---________________________________----
     fun uploadProfileImage(profileimage: Uri) =
         storageProfileReference.child(FirebaseAuth.getInstance().uid.toString())
             .putFile(profileimage)
@@ -51,7 +56,9 @@ class ApiServiceRepo(context: Context) {
     fun fitchUsers(userId: String) =
         firestore.collection("users").whereEqualTo("userId", userId).get()
 
-    // for get instead set is get
+    //-----------------------------------Delete user fun---------------------------------------------
+
+    fun deleteUserProfile() = firestore.document(FirebaseAuth.getInstance().uid.toString()).delete()
 //-----------------------------car collection------------------------------------
     fun save(car: CarModel) =
         firestore.collection("car")
@@ -83,9 +90,9 @@ fun fitchFavorites() =
 //    val fileName = formatter.format(now)
 
 
-//-----------------------------------Delete fun---------------------------------------------
 
-//    fun delete() = firestore.document(FirebaseAuth.getInstance().uid.toString()).delete()
+//------------------------------------------------------------------------------
+
 
 
     companion object {

@@ -68,7 +68,7 @@ class CarFragment : Fragment() {
 
     }
 
-    // carViewModel.save("")     //calling function "save"  continue here
+    // carViewModel.save("")     //calling function "save"
 
 
     fun observer() {

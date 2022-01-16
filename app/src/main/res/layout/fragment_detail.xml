@@ -11,7 +11,7 @@
         android:id="@+id/titleDetail_TextView"
         android:layout_width="223dp"
         android:layout_height="42dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="36dp"
         android:gravity="center"
         android:text="TextView"
         android:textSize="27sp"
@@ -23,7 +23,7 @@
         android:id="@+id/photoDetails_imageView"
         android:layout_width="0dp"
         android:layout_height="250dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="5dp">
 
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:padding="1dp"
-                android:text="TextView"
+                android:text="Make: "
                 android:textSize="17sp" />
 
             <TextView
@@ -110,31 +110,35 @@
                 android:padding="1dp"
                 android:text="TextView"
                 android:textSize="16sp" />
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/detailMessage_Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="60dp"
-        android:text="message"
-        app:cornerRadius="22dp"
+        android:layout_width="52dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="76dp"
+        android:background="@android:drawable/ic_dialog_email"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
-
-    <Button
-        android:id="@+id/detailFfavorit_Botton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="4dp"
-        android:text="favorite"
-        app:cornerRadius="22dp"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintVertical_bias="0.567"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ToggleButton
+        android:id="@+id/favorite_toggle_button"
+        android:layout_width="55dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="36dp"
+        android:background="@drawable/ic_baseline_favorite_border_24"
+        android:textColor="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleDetail_TextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -45,7 +45,7 @@ class DetailFragment : Fragment() {
             it?.let { Car ->
                 //
                 var imagePath =
-                    "https://firebasestorage.googleapis.com/v0/b/car-spec-9231b.appspot.com/o/image%2F${FirebaseAuth.getInstance().uid}?alt=media&token=787746ff-b858-49c6-91d4-218d775195b3"
+                    "https://firebasestorage.googleapis.com/v0/b/car-spec-9231b.appspot.com/o/image%2F${Car.image}?alt=media&token=2e3a534c-22d3-48b0-8f0e-ee5a5d41897c"
                 binding.titleDetailTextView.text = Car.title
                 Glide.with(this)
                     .load(imagePath)

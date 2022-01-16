@@ -19,16 +19,22 @@ import java.lang.Exception
 private const val TAG = "UsersViewModel"
 
 class UsersViewModel : ViewModel() {
+    //--------------------- user Model -------------
+    private val user = UsersModel()
     //----------------------Reposetory---------------
     private val apiServ = ApiServiceRepo.get()
 
     //----------------------LiveData---------------
     val usersLiveData = MutableLiveData<UsersModel>()
     val usersErrorLiveData = MutableLiveData<List<String>>()
+
     //-----------------------upload users variables ---------------------
     val uploadUsersImageLiveData = MutableLiveData<String>()
     val uploadUsersImageErrorLiveData = MutableLiveData<String>()
 
+    //------------------------ delete user profile ----------------------
+    val deleteProLiveData = MutableLiveData<String>()
+    val deleteProErrorLiveData = MutableLiveData<String>()
 
     //--------------------Firestore-------------------
     private var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -37,7 +43,7 @@ class UsersViewModel : ViewModel() {
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
 
     }
-
+//--------------------save users ----------------------------------------------
 
     fun saveUsers(users: UsersModel) {
         apiServ.saveUsers(users)
@@ -47,17 +53,28 @@ class UsersViewModel : ViewModel() {
             }
     }
 
+    fun updateUsers(users: UsersModel){
+        apiServ.updateUsers(users)
+            .addOnSuccessListener {
+                Log.d(TAG, "Firebase, Users Document saved ")
+
+            }
+    }
+
+    //-------------------------------------------get user ---------------------------------------------
     fun fetchUsers() {
-val userId = FirebaseAuth.getInstance().uid
+        val userId = FirebaseAuth.getInstance().uid
         apiServ.fitchUsers(userId!!)
             .addOnSuccessListener {
                 Log.d(TAG, "Firebase: Users Document fetched")
 
-                var user = it.documents[0].toObject(UsersModel::class.java)// make sure of user have id
+                var user =
+                    it.documents[0].toObject(UsersModel::class.java)// make sure of user have id
                 Log.d(TAG, user.toString())
                 usersLiveData.postValue(user!!)
             }
     }
+    // ---------------------------------------- upload user Photo -------------------------------------
 
     fun uploadUsersPhoto(profileimage: Uri) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -87,6 +104,26 @@ val userId = FirebaseAuth.getInstance().uid
             } catch (e: Exception) {
                 Log.d(TAG, e.message.toString())
 
+            }
+        }
+    }
+
+
+
+    //--------------------------------------- delete user ---------------------------------------
+    fun deleteuser() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                apiServ.deleteUserProfile().addOnSuccessListener {
+                    deleteProLiveData.postValue("")
+                    Log.d("Firebase", "document saved")
+                }.addOnFailureListener {
+                    deleteProErrorLiveData.postValue(it.message.toString())
+                    Log.d("Firebase", it.message.toString())
+                }
+            } catch (e: Exception) {
+                Log.d(TAG, e.message.toString())
+                deleteProErrorLiveData.postValue(e.message.toString())
             }
         }
     }

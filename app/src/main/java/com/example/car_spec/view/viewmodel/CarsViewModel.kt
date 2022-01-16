@@ -1,5 +1,6 @@
 package com.example.car_spec.view.viewmodel
 
+import android.content.ContentValues
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
@@ -63,9 +64,10 @@ class CarsViewModel : ViewModel() {
                 val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss:sss", Locale.getDefault())
 //                val now = Date()
                 val time = formatter.format(Date())
-                val imagename = documentId + "_" + FirebaseAuth.getInstance().uid.toString() + "_" + time + "/"
+                val imagename =
+                    documentId + "_" + FirebaseAuth.getInstance().uid.toString() + "_" + time + "/"
 
-                uploadPhoto(uri, imagename)
+                uploadPhoto(uri, car.image)
                 Log.d(TAG, "File Name")
 
                 // updating the document with Image Name
@@ -91,7 +93,7 @@ class CarsViewModel : ViewModel() {
                     Log.d(TAG, taskSnapshot.metadata?.name.toString())
 
                     if (responseImage.isSuccessful) {
-                        uploadImageLiveData.postValue("successful")
+                        uploadImageLiveData.postValue(this.toString())
                     } else {
 
                         uploadImageErrorLiveData.postValue("")
@@ -133,8 +135,30 @@ class CarsViewModel : ViewModel() {
             }
 
             .addOnFailureListener() {
+                Log.d(TAG, "fitch: Failed")
 
             }
+
+    }
+
+//    fun removeFavoritCar(carId : Int){
+//        viewModelScope.launch(Dispatchers.IO) {
+//            try {
+//                val response = apiServ.removeFavoriteProduct(productId)
+//                if (!response.isSuccessful){
+//                    Log.d(ContentValues.TAG, response.message())
+//                    productsErrorLiveData.postValue(response.message())
+//
+//                }
+//            }catch (e: Exception){
+//                Log.d(ContentValues.TAG, e.message.toString())
+//                productsErrorLiveData.postValue(e.message.toString())
+//
+//            }
+//        }
+//    }
+
+    fun addFavoriteCar(carId : Int) {
 
     }
 

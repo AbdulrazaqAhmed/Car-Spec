@@ -14,16 +14,17 @@ private const val TAG = "FavoriteViewModel"
 class FavoriteViewModel : ViewModel() {
     private val apiServ = ApiServiceRepo.get()
 
-    val favoriteLiveData = MutableLiveData<CarModel>()
+    val favoriteLiveData = MutableLiveData<List<CarModel>>()
     val favoriteErrorData = MutableLiveData<String>()
 
 
     fun callFavorites() {
+        val car = mutableListOf<CarModel>()
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = apiServ.fitchFavorites()
                 if (response.isSuccessful){
-                 favoriteLiveData.postValue(CarModel())
+                 favoriteLiveData.postValue(car)
                 }else{
                     favoriteErrorData.postValue("Error")
                     Log.d(TAG, this.toString())

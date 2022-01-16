@@ -37,7 +37,7 @@
             tools:src="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/detailFavorite_textView"
+            android:id="@+id/descriptionFavorite_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -49,12 +49,19 @@
             app:layout_constraintTop_toBottomOf="@+id/photoDetails_imageView" />
 
         <TextView
+            android:id="@+id/favoriteMake_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
             android:id="@+id/FavoritePrice_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="1dp"
             android:layout_marginTop="8dp"
             android:text="TextView"
+            android:textSize="19sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detailDescription_textView" />
 

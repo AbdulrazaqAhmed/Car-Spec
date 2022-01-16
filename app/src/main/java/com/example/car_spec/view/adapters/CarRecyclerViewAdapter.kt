@@ -1,6 +1,7 @@
 package com.example.car_spec.view.adapters
 
 import android.content.Context
+import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +19,7 @@ import com.example.car_spec.view.viewmodel.CarsViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 
-class CarRecyclerViewAdapter(val viewModel: CarsViewModel,val context : Context) :
+class CarRecyclerViewAdapter(val viewModel: CarsViewModel, val context: Context) :
     RecyclerView.Adapter<CarRecyclerViewAdapter.CarViewHolder>() {
 
 
@@ -59,15 +60,26 @@ class CarRecyclerViewAdapter(val viewModel: CarsViewModel,val context : Context)
         holder.date.text = item.date.toString()
         holder.price.text = "${item.price} SAR"
 //        holder.favoriteIcon.isChecked = item.favorite
-        Glide.with(context).load("https://firebasestorage.googleapis.com/v0/b/car-spec-9231b.appspot.com/o/image%2F${item.image}?alt=media&token=787746ff-b858-49c6-91d4-218d775195b3")
+        Glide.with(context)
+                .load("https://firebasestorage.googleapis.com/v0/b/car-spec-9231b.appspot.com/o/image%2F${item.image}?alt=media&token=2e3a534c-22d3-48b0-8f0e-ee5a5d41897c")
             .centerCrop()
             .into(holder.image)
+//        holder.favortiteTogellBotton.setOnClickListener() {
+//            if (holder.favortiteTogellBotton.isChecked) {
+//                viewModel.addFavoriteCar(item.id)
+//            } else {
+////                viewModel.remo(item.id)
+//
+//            }
+//
+//        }
 
 
-        holder.itemView.setOnClickListener(){ view ->
 
-                viewModel.selectedItemMutableLiveData.postValue(item)
-                view.findNavController().navigate(R.id.action_carFragment_to_detailFragment)
+        holder.itemView.setOnClickListener() { view ->
+
+            viewModel.selectedItemMutableLiveData.postValue(item)
+            view.findNavController().navigate(R.id.action_carFragment_to_detailFragment)
 
 
         }
@@ -98,7 +110,8 @@ class CarRecyclerViewAdapter(val viewModel: CarsViewModel,val context : Context)
         val location: TextView = itemView.findViewById(R.id.location_textview)
         val date: TextView = itemView.findViewById(R.id.dateCreated_textView)
         val price: TextView = itemView.findViewById(R.id.price_textView)
-        val image : ImageView = itemView.findViewById(R.id.carImage_imageview)
+        val image: ImageView = itemView.findViewById(R.id.carImage_imageview)
+//        val favortiteTogellBotton: ToggleButton = itemView.findViewById(R.id.favorite_toggle_button)
 //        val favoriteIcon: ToggleButton = itemView.findViewById(R.id.favorite_toggle_button)
 
     }
