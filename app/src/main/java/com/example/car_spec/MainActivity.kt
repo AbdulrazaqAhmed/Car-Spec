@@ -1,30 +1,20 @@
 package com.example.car_spec
 
-import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.media.Ringtone
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.car_spec.databinding.ActivityMainBinding
-import com.example.car_spec.view.main.AddCarFragment
 import com.example.car_spec.view.main.CarFragment
 import com.example.car_spec.view.main.FavoritFragment
 import com.example.car_spec.view.main.MyCarFragment
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
-import com.google.firebase.auth.FirebaseAuth
 
 private lateinit var sharedPref: SharedPreferences
 private lateinit var sharedPrefEditor: SharedPreferences.Editor
@@ -32,29 +22,31 @@ private lateinit var sharedPrefEditor: SharedPreferences.Editor
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
-    private  var favoriteFragment= FavoritFragment()
-    private  var carFragment = CarFragment()
-    private var  myCarFragment = MyCarFragment()
+    private var favoriteFragment = FavoritFragment()
+    private var carFragment = CarFragment()
+    private var myCarFragment = MyCarFragment()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        replacementFragment(carFragment)
-//
-//
-//        binding.bottomNavigationView.setOnItemSelectedListener {
-//            when (it.itemId) {
-//                R.id.carFragment     -> replacementFragment(carFragment)
-//                R.id.favoritFragment -> replacementFragment(favoriteFragment)
-//                R.id.myCarFragment   -> replacementFragment(myCarFragment)
-//
-////                else -> {return}
-//            }
-//            true
-//
-//        }
+        replacementFragment(myCarFragment)
+
+
+        binding.bottomNavigationView.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.carFragment -> replacementFragment(carFragment)
+                R.id.favoritFragment2 -> replacementFragment(favoriteFragment)
+                R.id.myCarFragment2 -> replacementFragment(myCarFragment)
+//                R.id.message        -> replacementFragment(me)
+
+
+//                else -> {return}
+            }
+            true
+
+        }
 
 
 
@@ -82,14 +74,18 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-//        val navHostFragment =
-//            supportFragmentManager.findFragmentById(R.id.fragmentContainerView4) as NavHostFragment
-//        navController = navHostFragment.navController
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView4) as NavHostFragment
+        navController = navHostFragment.navController
+
+        setupActionBarWithNavController(navController)
 
 
 
 
-//        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
+        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
+
+
 //        val appBartitle = AppBarConfiguration(setOf(R.id.carFragment, R.id.favoritFragment,R.id.NotificationFragment,R.id.MessageFragment))
 //        setupActionBarWithNavController(navController, appBartitle)
 //
@@ -100,14 +96,21 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp()
 
     }
-//    private fun replacementFragment(fragment : Fragment) {
-//
-//
-//        if (fragment != null) {
-//            val transaction = supportFragmentManager.beginTransaction()
-//            transaction.replace(R.id.fragmentContainerView4, fragment)
+    private fun replacementFragment(fragment : Fragment) {
+
+
+        if (fragment != null) {
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragmentContainerView4, fragment)
+        }
+    }
+
+    override fun onBackPressed() {
+//        when((supportFragmentManager.findFragmentById(R.id.fragmentContainerView4) as NavHostFragment).navController.currentDestination?.label) {
+//          "fragment_car" -> super.onBackPressed()
+
 //        }
-//    }
+    }
 
 }
 

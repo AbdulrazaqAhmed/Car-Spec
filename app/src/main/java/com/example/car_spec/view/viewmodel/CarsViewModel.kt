@@ -141,6 +141,23 @@ class CarsViewModel : ViewModel() {
 
     }
 
+    fun removeFavoriteProduct(productId : Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = apiServ.removeFavorit(carId)
+                if (!response.isSuccessful){
+                    Log.d(ContentValues.TAG, response.message())
+                    productsErrorLiveData.postValue(response.message())
+
+                }
+            }catch (e: Exception){
+                Log.d(ContentValues.TAG, e.message.toString())
+                productsErrorLiveData.postValue(e.message.toString())
+
+            }
+        }
+    }
+
 //    fun removeFavoritCar(carId : Int){
 //        viewModelScope.launch(Dispatchers.IO) {
 //            try {
@@ -157,28 +174,28 @@ class CarsViewModel : ViewModel() {
 //            }
 //        }
 //    }
-
-    fun addFavoriteCar(carId : Int) {
-
-    }
-
-    // Update - set
-
-    fun set(car: CarModel) {
-        firestore.collection("car")
-            .add(car)
-
-    }
-
-    // Delete - delete
-
-    fun delete(car: CarModel) {
-        firestore.collection("car")
-
-
-        fun addFavoriteCar() {}
-
-    }
-
-
+//
+//    fun addFavoriteCar(carId : Int) {
+//
+//    }
+//
+//    // Update - set
+//
+//    fun set(car: CarModel) {
+//        firestore.collection("car")
+//            .add(car)
+//
+//    }
+//
+//    // Delete - delete
+//
+//    fun delete(car: CarModel) {
+//        firestore.collection("car")
+//
+//
+//
+//
+//    }
+//
+//    fun addFavoriteCar() {}
 }

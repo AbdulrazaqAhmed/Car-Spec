@@ -27,7 +27,7 @@ const val USER_ID = "USER_ID"
 class ApiServiceRepo(context: Context) {
 
     //car firebase to get instance
-     val  storageCarReference = FirebaseStorage.getInstance().getReference("image")
+    val storageCarReference = FirebaseStorage.getInstance().getReference("image")
     private val sharedPreferences =
         context.getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
     private val userId = sharedPreferences.getString(USER_ID, "")
@@ -40,65 +40,73 @@ class ApiServiceRepo(context: Context) {
     fun saveUsers(users: UsersModel) =
         firestore.collection("users").document(FirebaseAuth.getInstance().uid.toString())
             .set(users) // for get instead get
-//---------------------------------update users info -----------------------------------------
-    fun updateUsers(users: UsersModel)=
+
+    //---------------------------------update users info -----------------------------------------
+    fun updateUsers(users: UsersModel) =
         firestore.collection("users").document(FirebaseAuth.getInstance().uid.toString())
             .set(users)
 
 
-
-//____________________________---- upload profile image---________________________________----
+    //____________________________---- upload profile image---________________________________----done
     fun uploadProfileImage(profileimage: Uri) =
         storageProfileReference.child(FirebaseAuth.getInstance().uid.toString())
             .putFile(profileimage)
 
-    //-----------------------------Users Get fun------------------------------------------
+    //-----------------------------Users Get fun------------------------------------------------done
     fun fitchUsers(userId: String) =
         firestore.collection("users").whereEqualTo("userId", userId).get()
 
-    //-----------------------------------Delete user fun---------------------------------------------
+    //-----------------------------------Delete user fun---------------------------------------------done
 
     fun deleteUserProfile() = firestore.document(FirebaseAuth.getInstance().uid.toString()).delete()
-//-----------------------------car save collection------------------------------------
+
+    //-----------------------------car save collection------------------------------------done
     fun save(car: CarModel) =
         firestore.collection("car")
             .add(car)
 
-    //---------------------------------Upload Car Image Fun-----------------------------------------
+    //---------------------------------Upload Car Image Fun-----------------------------------------done
 
 
-
-    val time: String? = Calendar.getInstance().getTime().toString()
+//    val time: String? = Calendar.getInstance().getTime().toString()
 //    val storageRef = storageCarReference.child("/documentId_" + FirebaseAuth.getInstance().uid.toString() + "_" + time + "/") //put in variable
 
     fun uploadImage(imge: Uri, imagename: String) =
         storageCarReference.child(imagename).putFile(imge)
 
-    //--------------------------------car fitch fun--------------------------------------------
+    //--------------------------------car fitch fun--------------------------------------------done
     fun fitch() =
         firestore.collection("car")
             .get()
-
-    //------------------------------- fetch MyCar fun -----------------------------------------
+    //------------------------------- fetch MyCar fun -----------------------------------------done
     fun fitchMyCars() =
-        firestore.collection("car").whereEqualTo("userId", FirebaseAuth.getInstance().uid.toString())
+        firestore.collection("car")
+            .whereEqualTo("userId", FirebaseAuth.getInstance().uid.toString())
             .get()
-//------------------------------favorite get ----------------------------------------------
-fun fitchFavorites() =
-    firestore.collection("car")
-        .get()
-//------------------------------file title date and time --------------------------------------
-//    val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
-//
-//    val now = Date()
-//
-//    val fileName = formatter.format(now)
+
+    //------------------------------ detele mycar --------------------------------------------
+fun deleteMycars(car: CarModel) =
+    firestore.collection("car").document(FirebaseAuth.getInstance().uid.toString()).delete()
 
 
+    //-------------------------------update My Cars info ---------------------------------------
+    fun updateMycarInfo(car: CarModel)=
+        firestore.collection("car").document(FirebaseAuth.getInstance().uid.toString()).set(car)
+    //------------------------------- favorite add --------------------------------------------
+    fun addFavorites(car: CarModel)=
+        firestore.collection("car").add(car)
 
-//------------------------------------------------------------------------------
+    //------------------------------favorite get ----------------------------------------------
+    fun fitchFavorites() =
+        firestore.collection("car")
+            .get()
+
+    //------------------------------------Remove Favorite -------------------------------------------
+    fun removeFavorit(car: CarModel) =
+        firestore.collection("car")
 
 
+    //------------------------------------
 
     companion object {
         private var instance: ApiServiceRepo? = null

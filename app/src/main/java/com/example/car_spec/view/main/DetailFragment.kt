@@ -1,5 +1,6 @@
 package com.example.car_spec.view.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -34,6 +35,7 @@ class DetailFragment : Fragment() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -52,12 +54,22 @@ class DetailFragment : Fragment() {
                     .into(binding.photoDetailsImageView)
 
                 binding.detailDescriptionTextView.text = Car.description
-                binding.detailCarPriceTextview.text = Car.price.toString()
+                binding.detailCarPriceTextview.text = "Price: ${Car.price}"
                 binding.detailMakeTextView.text = Car.make
                 binding.detailModelTextview.text= Car.model
                 binding.detailLocationTextView.text = Car.location
                 binding.detailColorTextview.text= Car.color
                 binding.detailYearTextView.text = Car.year
+
+                binding.favoriteToggleButton.setOnClickListener(){
+                    if (binding.favoriteToggleButton.isChecked) {
+                        carViewModel.add(item.id)
+                    }else{
+                        viewModel.removeFavorite(item.id)
+                    }
+
+
+                }
 
 
 

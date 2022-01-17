@@ -50,16 +50,27 @@ class MyCarsViewModel : ViewModel() {
 
     }
 
-    fun set(car: CarModel) {
-        firestore.collection("car")
-            .add(car)
+    fun editMycarInfo(car: CarModel) {
+        apiServ.updateMycarInfo(car)
+            .addOnSuccessListener {
+                Log.d(TAG, "Modify My cars Info: ")
+
+            }
+    }
+
+
+    fun deleteMyCar(car: CarModel) {
+        apiServ.deleteMycars(car)
+            .addOnSuccessListener {
+                Log.d(TAG, "deleteMycars: ")
+
+            }
 
     }
 
     // Delete - delete
 
-    fun delete(car: CarModel) {
-        firestore.collection("car")
+
 
 
         fun addFavoriteCar() {}

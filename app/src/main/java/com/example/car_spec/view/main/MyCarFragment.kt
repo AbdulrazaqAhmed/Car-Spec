@@ -12,6 +12,7 @@ import com.example.car_spec.model.CarModel
 import com.example.car_spec.view.adapters.MyCarsadapter
 import com.example.car_spec.view.viewmodel.MyCarsViewModel
 
+private const val TAG = "MyCarFragment"
 
 class MyCarFragment : Fragment() {
     private var allCars = listOf<CarModel>()
@@ -49,10 +50,23 @@ class MyCarFragment : Fragment() {
             myCarAdapter.submitList(it)
             binding.mycarsItemRecyclerView.animate().alpha(1F)
 
-
-
         })
 
+        myCarsViewModel.mycarsLiveData.observe(viewLifecycleOwner, {
+            Log.d(TAG, "observer: my car live data")
+        })
+
+        myCarsViewModel.mycarsErrorLiveData.observe(viewLifecycleOwner, {
+            Log.d(TAG, "observer: Error live Data ")
+        })
+
+    }
+
+    //--------------------- update My Car Info ----------------------------------------
+    fun updateMycar(car: CarModel) {
+    car.apply {
+
+    }
 
     }
 

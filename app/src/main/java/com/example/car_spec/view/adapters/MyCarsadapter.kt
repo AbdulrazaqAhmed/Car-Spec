@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
@@ -60,6 +61,10 @@ class MyCarsadapter(val viewModel: MyCarsViewModel, val context: Context) :
             .centerCrop()
             .into(holder.myCarsimage)
 
+                holder.itemView.setOnClickListener(){ view ->
+                    viewModel.selectedItemMutableLiveData.postValue(item)
+                    view.findNavController().navigate(R.id.action_myCarFragment2_to_myCarDetailFragment)
+                }
     }
 
     override fun getItemCount(): Int {

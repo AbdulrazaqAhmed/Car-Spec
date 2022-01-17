@@ -8,12 +8,12 @@
         android:title="Cars" />
 
     <item
-        android:id="@+id/favoritFragment"
+        android:id="@+id/favoritFragment2"
         android:icon="@drawable/ic_baseline_favorite_24"
         android:title="Favorite" />
 
     <item
-        android:id="@+id/myCarFragment"
+        android:id="@+id/myCarFragment2"
         android:icon="@drawable/ic_baseline_directions_car_24"
         android:title="My Cars" />
 

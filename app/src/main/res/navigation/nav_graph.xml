@@ -15,9 +15,6 @@
         android:label="fragment_car"
         tools:layout="@layout/fragment_car" >
         <action
-            android:id="@+id/action_carFragment_to_favoritFragment2"
-            app:destination="@id/favoritFragment2" />
-        <action
             android:id="@+id/action_carFragment_to_addCarFragment"
             app:destination="@id/addCarFragment" />
         <action
@@ -46,4 +43,16 @@
         android:name="com.example.car_spec.view.main.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/myCarFragment2"
+        android:name="com.example.car_spec.view.main.MyCarFragment"
+        android:label="MyCarFragment" >
+        <action
+            android:id="@+id/action_myCarFragment2_to_myCarDetailFragment"
+            app:destination="@id/myCarDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myCarDetailFragment"
+        android:name="com.example.car_spec.view.main.MyCarDetailFragment"
+        android:label="MyCarDetailFragment" />
 </navigation>

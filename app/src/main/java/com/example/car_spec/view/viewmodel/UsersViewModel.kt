@@ -31,7 +31,9 @@ class UsersViewModel : ViewModel() {
     //-----------------------upload users variables ---------------------
     val uploadUsersImageLiveData = MutableLiveData<String>()
     val uploadUsersImageErrorLiveData = MutableLiveData<String>()
-
+    //----------------------- delete my Cars ----------------------------
+    val deleteMyCarsLiveData       = MutableLiveData<String>()
+    val deleteMyCarsErrorLiveData  = MutableLiveData<String>()
     //------------------------ delete user profile ----------------------
     val deleteProLiveData = MutableLiveData<String>()
     val deleteProErrorLiveData = MutableLiveData<String>()

@@ -1,5 +1,6 @@
 package com.example.car_spec.view.viewmodel
 
+import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,6 +12,7 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 
 private const val TAG = "FavoriteViewModel"
+
 class FavoriteViewModel : ViewModel() {
     private val apiServ = ApiServiceRepo.get()
 
@@ -23,15 +25,15 @@ class FavoriteViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = apiServ.fitchFavorites()
-                if (response.isSuccessful){
-                 favoriteLiveData.postValue(car)
-                }else{
+                if (response.isSuccessful) {
+                    favoriteLiveData.postValue(car)
+                } else {
                     favoriteErrorData.postValue("Error")
                     Log.d(TAG, this.toString())
                 }
 
 
-            }catch (e: Exception) {
+            } catch (e: Exception) {
                 Log.d(TAG, e.message.toString())
                 favoriteErrorData.postValue("Error")
 
@@ -40,5 +42,21 @@ class FavoriteViewModel : ViewModel() {
 
     }
 
+//    fun removeFavorite(productId: Int) {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            try {
+//                val response = apiServ.removeFavoriteProduct(productId)
+//                if (!response.isSuccessful) {
+//                    Log.d(ContentValues.TAG, response.message())
+//                    productsErrorLiveData.postValue(response.message())
+//
+//                }
+//            } catch (e: Exception) {
+//                Log.d(ContentValues.TAG, e.message.toString())
+//                productsErrorLiveData.postValue(e.message.toString())
+//
+//            }
+//        }
+//    }
 
 }
