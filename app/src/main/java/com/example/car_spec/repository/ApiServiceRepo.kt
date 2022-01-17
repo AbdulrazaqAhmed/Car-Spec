@@ -52,14 +52,14 @@ class ApiServiceRepo(context: Context) {
         storageProfileReference.child(FirebaseAuth.getInstance().uid.toString())
             .putFile(profileimage)
 
-    //-----------------------------Users Save fun------------------------------------------
+    //-----------------------------Users Get fun------------------------------------------
     fun fitchUsers(userId: String) =
         firestore.collection("users").whereEqualTo("userId", userId).get()
 
     //-----------------------------------Delete user fun---------------------------------------------
 
     fun deleteUserProfile() = firestore.document(FirebaseAuth.getInstance().uid.toString()).delete()
-//-----------------------------car collection------------------------------------
+//-----------------------------car save collection------------------------------------
     fun save(car: CarModel) =
         firestore.collection("car")
             .add(car)
@@ -74,11 +74,16 @@ class ApiServiceRepo(context: Context) {
     fun uploadImage(imge: Uri, imagename: String) =
         storageCarReference.child(imagename).putFile(imge)
 
-    //--------------------------------fitch fun--------------------------------------------
+    //--------------------------------car fitch fun--------------------------------------------
     fun fitch() =
         firestore.collection("car")
             .get()
-//------------------------------favorite calling ----------------------------------------------
+
+    //------------------------------- fetch MyCar fun -----------------------------------------
+    fun fitchMyCars() =
+        firestore.collection("car").whereEqualTo("userId", FirebaseAuth.getInstance().uid.toString())
+            .get()
+//------------------------------favorite get ----------------------------------------------
 fun fitchFavorites() =
     firestore.collection("car")
         .get()

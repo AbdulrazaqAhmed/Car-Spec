@@ -22,6 +22,7 @@ import com.example.car_spec.databinding.ActivityMainBinding
 import com.example.car_spec.view.main.AddCarFragment
 import com.example.car_spec.view.main.CarFragment
 import com.example.car_spec.view.main.FavoritFragment
+import com.example.car_spec.view.main.MyCarFragment
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.firebase.auth.FirebaseAuth
 
@@ -33,26 +34,27 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private  var favoriteFragment= FavoritFragment()
     private  var carFragment = CarFragment()
+    private var  myCarFragment = MyCarFragment()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        replacementFragment(carFragment)
-
-
-        binding.bottomNavigationView.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.carFragment -> replacementFragment(carFragment)
-                R.id.favoritFragment -> replacementFragment(favoriteFragment)
-
-
-//                else -> {return}
-            }
-            true
-
-        }
+//        replacementFragment(carFragment)
+//
+//
+//        binding.bottomNavigationView.setOnItemSelectedListener {
+//            when (it.itemId) {
+//                R.id.carFragment     -> replacementFragment(carFragment)
+//                R.id.favoritFragment -> replacementFragment(favoriteFragment)
+//                R.id.myCarFragment   -> replacementFragment(myCarFragment)
+//
+////                else -> {return}
+//            }
+//            true
+//
+//        }
 
 
 
@@ -80,9 +82,9 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fragmentContainerView4) as NavHostFragment
-        navController = navHostFragment.navController
+//        val navHostFragment =
+//            supportFragmentManager.findFragmentById(R.id.fragmentContainerView4) as NavHostFragment
+//        navController = navHostFragment.navController
 
 
 
@@ -98,14 +100,14 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp()
 
     }
-    private fun replacementFragment(fragment : Fragment) {
-
-
-        if (fragment != null) {
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragmentContainerView4, fragment)
-        }
-    }
+//    private fun replacementFragment(fragment : Fragment) {
+//
+//
+//        if (fragment != null) {
+//            val transaction = supportFragmentManager.beginTransaction()
+//            transaction.replace(R.id.fragmentContainerView4, fragment)
+//        }
+//    }
 
 }
 
