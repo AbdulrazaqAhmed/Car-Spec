@@ -3,10 +3,14 @@ package com.example.car_spec.view.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.car_spec.model.CarModel
 import com.example.car_spec.repository.ApiServiceRepo
+import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 private const val TAG = "MyCarsViewModel"
 
@@ -19,6 +23,8 @@ class MyCarsViewModel : ViewModel() {
     val mycarsLiveData = MutableLiveData<List<CarModel>>()
     val mycarsErrorLiveData = MutableLiveData<List<String>>()
     val selectedItemMutableLiveData = MutableLiveData<CarModel>()
+    val deleteMyCarLiveData = MutableLiveData<String>()
+    val deleteMyCarErrorLiveData = MutableLiveData<String>()
     private var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
 
@@ -50,8 +56,8 @@ class MyCarsViewModel : ViewModel() {
 
     }
 
-    fun editMycarInfo(car: CarModel) {
-        apiServ.updateMycarInfo(car)
+    fun editMycarInfo(mycar: CarModel) {
+        apiServ.updateMycarInfo(mycar)
             .addOnSuccessListener {
                 Log.d(TAG, "Modify My cars Info: ")
 
@@ -59,12 +65,22 @@ class MyCarsViewModel : ViewModel() {
     }
 
 
-    fun deleteMyCar(car: CarModel) {
-        apiServ.deleteMycars(car)
-            .addOnSuccessListener {
-                Log.d(TAG, "deleteMycars: ")
-
+    fun deleteMyCar(carModel: CarModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try { apiServ.deleteMycars(carModel).addOnSuccessListener {
+                deleteMyCarLiveData.postValue("")
+                Log.d(TAG, "deleteMyCar: ")
+            }.addOnFailureListener{
+                deleteMyCarErrorLiveData.postValue(it.message.toString())
+//                Log.d("Delete Error ",it.message.toString())
             }
+
+            }catch (e: Exception){
+                Log.d(TAG, e.message.toString())
+                deleteMyCarErrorLiveData.postValue(e.message.toString())
+            }
+        }
+
 
     }
 
@@ -77,4 +93,3 @@ class MyCarsViewModel : ViewModel() {
 
     }
 
-}

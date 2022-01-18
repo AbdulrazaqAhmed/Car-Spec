@@ -141,22 +141,22 @@ class CarsViewModel : ViewModel() {
 
     }
 
-    fun removeFavoriteProduct(productId : Int){
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val response = apiServ.removeFavorit(carId)
-                if (!response.isSuccessful){
-                    Log.d(ContentValues.TAG, response.message())
-                    productsErrorLiveData.postValue(response.message())
-
-                }
-            }catch (e: Exception){
-                Log.d(ContentValues.TAG, e.message.toString())
-                productsErrorLiveData.postValue(e.message.toString())
-
-            }
-        }
-    }
+//    fun removeFavoriteProduct(productId : Int){
+//        viewModelScope.launch(Dispatchers.IO) {
+//            try {
+//                val response = apiServ.removeFavorit(carId)
+//                if (!response.isSuccessful){
+//                    Log.d(ContentValues.TAG, response.message())
+//                    productsErrorLiveData.postValue(response.message())
+//
+//                }
+//            }catch (e: Exception){
+//                Log.d(ContentValues.TAG, e.message.toString())
+//                productsErrorLiveData.postValue(e.message.toString())
+//
+//            }
+//        }
+//    }
 
 //    fun removeFavoritCar(carId : Int){
 //        viewModelScope.launch(Dispatchers.IO) {

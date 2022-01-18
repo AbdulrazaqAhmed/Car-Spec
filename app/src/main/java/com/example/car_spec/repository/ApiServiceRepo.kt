@@ -8,6 +8,7 @@ import com.example.car_spec.accessablity.SHARED_PREF_FILE
 import com.example.car_spec.model.CarModel
 import com.example.car_spec.model.UsersModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.auth.User
@@ -85,13 +86,13 @@ class ApiServiceRepo(context: Context) {
             .get()
 
     //------------------------------ detele mycar --------------------------------------------
-fun deleteMycars(car: CarModel) =
-    firestore.collection("car").document(FirebaseAuth.getInstance().uid.toString()).delete()
+fun deleteMycars(car : CarModel) =
+    firestore.collection("car").document(car.documentId).delete()
 
 
     //-------------------------------update My Cars info ---------------------------------------
-    fun updateMycarInfo(car: CarModel)=
-        firestore.collection("car").document(FirebaseAuth.getInstance().uid.toString()).set(car)
+    fun updateMycarInfo(car : CarModel)=
+        firestore.collection("car").document(car.documentId).set(car)
     //------------------------------- favorite add --------------------------------------------
     fun addFavorites(car: CarModel)=
         firestore.collection("car").add(car)

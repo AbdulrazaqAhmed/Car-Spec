@@ -204,6 +204,7 @@ class ProfileFragment : Fragment() {
 
             userViewModel.updateUsers(currentUser)
         }
+
     }
 
 }

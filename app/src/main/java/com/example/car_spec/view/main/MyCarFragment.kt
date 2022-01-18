@@ -38,12 +38,13 @@ class MyCarFragment : Fragment() {
         setHasOptionsMenu(true)
         myCarsViewModel.getMyCars()
         observer()
+
     }
 
     fun observer() {
 
         myCarsViewModel.mycarsLiveData.observe(viewLifecycleOwner, {
-            Log.d("mainAc", it.toString())
+            Log.d("obserLivedata", it.toString())
             binding.progressBar4.animate().alpha(0F)
             binding.progressBar4.animate().alpha(0F).setDuration(1000)
             allCars = it
@@ -52,22 +53,17 @@ class MyCarFragment : Fragment() {
 
         })
 
-        myCarsViewModel.mycarsLiveData.observe(viewLifecycleOwner, {
-            Log.d(TAG, "observer: my car live data")
-        })
+//        myCarsViewModel.mycarsLiveData.observe(viewLifecycleOwner, {
+//            Log.d(TAG, "observer: my car live data")
+//        })
 
-        myCarsViewModel.mycarsErrorLiveData.observe(viewLifecycleOwner, {
-            Log.d(TAG, "observer: Error live Data ")
-        })
+//        myCarsViewModel.mycarsErrorLiveData.observe(viewLifecycleOwner, {
+//            Log.d("observer Error", it.toString())
+//        })
 
     }
 
     //--------------------- update My Car Info ----------------------------------------
-    fun updateMycar(car: CarModel) {
-    car.apply {
 
-    }
-
-    }
 
 }

@@ -5,6 +5,7 @@ import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.net.toUri
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
@@ -30,6 +32,9 @@ import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.internal.entity.CaptureStrategy
 import java.io.File
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import java.util.concurrent.ThreadLocalRandom
 import kotlin.math.log
@@ -66,6 +71,7 @@ class AddCarFragment : Fragment() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -87,9 +93,16 @@ class AddCarFragment : Fragment() {
 
         }
 
+//        val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
+//        val mDate = formatter.parse(dateStr)
+
 
         binding.saveAddButton.setOnClickListener() {
 
+            val current = LocalDateTime.now()
+
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+            val formatted = current.format(formatter)
 
             val brandMake = binding.makeAddEditText.text.toString()
             val brandModel = binding.modelAddEdittext.text.toString()
@@ -119,13 +132,14 @@ class AddCarFragment : Fragment() {
                     "${Date()}",
                     addPrice,
                     true,
-                    randomString,
+                    "$randomString $formatted",
                     brandDescription,
                     userIdProfile!!
 
 
                 ), image
             )
+
             observer()
             bindSelectedImage()
             findNavController().navigate(R.id.carFragment)
@@ -196,7 +210,7 @@ class AddCarFragment : Fragment() {
 
     fun bindSelectedImage() {
         imagePath =
-            "https://firebasestorage.googleapis.com/v0/b/car-spec-9231b.appspot.com/o/image%2FC12RN34ZvOPUsi7EIeli_PUP8Favcr5M6xTuSHm0RGq3sg0k1_2022-01-13%2014%3A15%3A57%3A847?alt=media&token=09720aeb-7236-4349-b356-81119ca99571"
+            "https://firebasestorage.googleapis.com/v0/b/car-spec-9231b.appspot.com/o/image%2F${FirebaseAuth.getInstance().uid}?alt=media&token=09720aeb-7236-4349-b356-81119ca99571"
         Glide.with(this).load(imagePath)
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .skipMemoryCache(true)
@@ -210,6 +224,16 @@ class AddCarFragment : Fragment() {
             .captureStrategy(CaptureStrategy(true, "com.example.car_spec"))
             .forResult(image_Picker)
 
+    }
+    fun getDate(dateStr: String) {
+        try {
+            /** DEBUG dateStr = '2006-04-16T04:00:00Z' **/
+            val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
+            val mDate = formatter.parse(dateStr) // this never ends while debugging
+            Log.e("mDate", mDate.toString())
+        } catch (e: Exception){
+            Log.e("mDate",e.toString()) // this never gets called either
+        }
     }
 
 }

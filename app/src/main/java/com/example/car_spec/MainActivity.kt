@@ -105,12 +105,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-//        when((supportFragmentManager.findFragmentById(R.id.fragmentContainerView4) as NavHostFragment).navController.currentDestination?.label) {
-//          "fragment_car" -> super.onBackPressed()
-
-//        }
-    }
+//    override fun onBackPressed() {
+////        when((supportFragmentManager.findFragmentById(R.id.fragmentContainerView4) as NavHostFragment).navController.currentDestination?.label) {
+////          "fragment_car" -> super.onBackPressed()
+//
+////        }
+//    }
 
 }
 
