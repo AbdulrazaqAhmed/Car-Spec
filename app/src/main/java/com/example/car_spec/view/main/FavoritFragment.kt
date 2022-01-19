@@ -17,6 +17,7 @@ import com.example.car_spec.view.viewmodel.FavoriteViewModel
 private val TAG = "FavoriteFragment"
 
 class FavoritFragment : Fragment() {
+    private var allFavoriteCars = listOf<CarModel>()
     private lateinit var binding: FragmentFavoritBinding
     private val favoriteViewModel: FavoriteViewModel by activityViewModels()
     private lateinit var favCarAdapter: FavoriteCarRecyclerAdopter
@@ -33,6 +34,10 @@ class FavoritFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        favCarAdapter = FavoriteCarRecyclerAdopter(favoriteViewModel,requireActivity())
+        binding.recyclerView.adapter = favCarAdapter
+
+        setHasOptionsMenu(true)
         observer()
         favoriteViewModel.callFavorites()
 
@@ -42,13 +47,18 @@ class FavoritFragment : Fragment() {
         favoriteViewModel.favoriteLiveData.observe(viewLifecycleOwner, {
             Log.d("observer: ", it.toString())
             binding.progressBar2.animate().alpha(0f)
+            binding.progressBar2.animate().alpha(0F).setDuration(1000)
+            allFavoriteCars = it
             favCarAdapter.submitList(it)
+            binding.progressBar2.animate().alpha(1F)
 
         })
         favoriteViewModel.favoriteErrorData.observe(viewLifecycleOwner, {
             it?.let {
-                Toast.makeText(requireActivity(), it , Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
             }
+            favoriteViewModel.favoriteErrorData.postValue(null)
+
         })
 
     }

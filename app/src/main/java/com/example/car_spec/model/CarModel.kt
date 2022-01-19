@@ -16,7 +16,7 @@ data class CarModel(
     var id: Int = 0,
     var date: String = "",
     var price: Double = 0.0,
-    var favorite: Boolean = true,
+    var favorite: Boolean = false,
     var image: String = "",
     var description: String = "",
     val userId: String = "",

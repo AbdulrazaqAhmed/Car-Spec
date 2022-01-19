@@ -84,12 +84,6 @@ class MyCarsViewModel : ViewModel() {
 
     }
 
-    // Delete - delete
-
-
-
-
-        fun addFavoriteCar() {}
 
     }
 

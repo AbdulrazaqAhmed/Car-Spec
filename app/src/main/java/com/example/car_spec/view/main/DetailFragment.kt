@@ -12,17 +12,23 @@ import com.bumptech.glide.Glide
 import com.example.car_spec.R
 import com.example.car_spec.databinding.FragmentAddCarBinding
 import com.example.car_spec.databinding.FragmentDetailBinding
+import com.example.car_spec.model.CarModel
+import com.example.car_spec.model.FavoriteModel
 import com.example.car_spec.view.viewmodel.CarsViewModel
+import com.example.car_spec.view.viewmodel.FavoriteViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.zhihu.matisse.engine.impl.PicassoEngine
 
-
+private lateinit var car : CarModel
+private  lateinit var favModel : FavoriteModel
 class DetailFragment : Fragment() {
     private val carViewModel: CarsViewModel by activityViewModels()
     private lateinit var binding: FragmentDetailBinding
+    private val favoriteViewModel: FavoriteViewModel by activityViewModels()
+
 
 
     override fun onCreateView(
@@ -38,6 +44,8 @@ class DetailFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        favModel = FavoriteModel(favModel.documentId, favModel.userId)
+
 
 //        val bottomNav: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
 //        bottomNav.visibility = View.GONE
@@ -61,15 +69,9 @@ class DetailFragment : Fragment() {
                 binding.detailColorTextview.text= "Color: ${Car.color}"
                 binding.detailYearTextView.text = "Year: ${Car.year}"
 
-//                binding.favoriteToggleButton.setOnClickListener(){
-//                    if (binding.favoriteToggleButton.isChecked) {
-//                        carViewModel.add(item.id)
-//                    }else{
-//                        viewModel.removeFavorite(item.id)
-//                    }
-//
-//
-//                }
+                car = Car
+
+
 
 
 
@@ -78,6 +80,19 @@ class DetailFragment : Fragment() {
 //                    binding.
 //                }
             }
+            binding.favoriteToggleButton.setOnClickListener(){
+                if (binding.favoriteToggleButton.isChecked) {
+                    favoriteViewModel.addFavorites(car)
+                }else{
+                    favoriteViewModel.removeFavorite()
+                }
+
+
+            }
         })
+
+
+
+
     }
 }

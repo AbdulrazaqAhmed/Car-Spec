@@ -6,6 +6,7 @@ import android.util.Log
 import com.example.car_spec.Api.CarApi
 import com.example.car_spec.accessablity.SHARED_PREF_FILE
 import com.example.car_spec.model.CarModel
+import com.example.car_spec.model.FavoriteModel
 import com.example.car_spec.model.UsersModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentId
@@ -40,20 +41,19 @@ class ApiServiceRepo(context: Context) {
     //-----------------------------Users Save fun------------------------------------------
     fun saveUsers(users: UsersModel) =
         firestore.collection("users").document(FirebaseAuth.getInstance().uid.toString())
-            .set(users) // for get instead get
+            .set(users)
 
-    //---------------------------------update users info -----------------------------------------
+    //---------------------------------update users info --------------------------------------------done
     fun updateUsers(users: UsersModel) =
         firestore.collection("users").document(FirebaseAuth.getInstance().uid.toString())
             .set(users)
 
-
-    //____________________________---- upload profile image---________________________________----done
+    //____________________________---- upload profile image---________________________________-------done
     fun uploadProfileImage(profileimage: Uri) =
         storageProfileReference.child(FirebaseAuth.getInstance().uid.toString())
             .putFile(profileimage)
 
-    //-----------------------------Users Get fun------------------------------------------------done
+    //-----------------------------Users Get fun-----------------------------------------------------done
     fun fitchUsers(userId: String) =
         firestore.collection("users").whereEqualTo("userId", userId).get()
 
@@ -61,50 +61,52 @@ class ApiServiceRepo(context: Context) {
 
     fun deleteUserProfile() = firestore.document(FirebaseAuth.getInstance().uid.toString()).delete()
 
-    //-----------------------------car save collection------------------------------------done
+    //-----------------------------car save collection-----------------------------------------------done
     fun save(car: CarModel) =
         firestore.collection("car")
             .add(car)
 
-    //---------------------------------Upload Car Image Fun-----------------------------------------done
+    //---------------------------------Upload Car Image Fun------------------------------------------done
 
 
 //    val time: String? = Calendar.getInstance().getTime().toString()
-//    val storageRef = storageCarReference.child("/documentId_" + FirebaseAuth.getInstance().uid.toString() + "_" + time + "/") //put in variable
+//    val storageRef = storageCarReference.child("/documentId_" + FirebaseAuth.getInstance().uid.toString() + "_" + time + "/")
 
     fun uploadImage(imge: Uri, imagename: String) =
         storageCarReference.child(imagename).putFile(imge)
 
-    //--------------------------------car fitch fun--------------------------------------------done
+    //--------------------------------car fitch fun---------------------------------------------------done
     fun fitch() =
         firestore.collection("car")
             .get()
-    //------------------------------- fetch MyCar fun -----------------------------------------done
+
+    //------------------------------- fetch MyCar fun ------------------------------------------------done
     fun fitchMyCars() =
         firestore.collection("car")
             .whereEqualTo("userId", FirebaseAuth.getInstance().uid.toString())
             .get()
 
-    //------------------------------ detele mycar --------------------------------------------
-fun deleteMycars(car : CarModel) =
-    firestore.collection("car").document(car.documentId).delete()
+    //------------------------------ detele mycar ----------------------------------------------------done
+    fun deleteMycars(car: CarModel) =
+        firestore.collection("car").document(car.documentId).delete()
 
 
-    //-------------------------------update My Cars info ---------------------------------------
-    fun updateMycarInfo(car : CarModel)=
+    //-------------------------------update My Cars info --------------------------------------------done
+    fun updateMycarInfo(car: CarModel) =
         firestore.collection("car").document(car.documentId).set(car)
-    //------------------------------- favorite add --------------------------------------------
-    fun addFavorites(car: CarModel)=
-        firestore.collection("car").add(car)
 
-    //------------------------------favorite get ----------------------------------------------
+    //------------------------------- favorite add --------------------------------------------still
+    fun addFavorites(car : CarModel) =
+        firestore.collection("favorite").add(car)
+
+    //------------------------------favorite get ----------------------------------------------still
     fun fitchFavorites() =
-        firestore.collection("car")
-            .get()
+        firestore.collection("favorite")
+            .whereEqualTo("userId", FirebaseAuth.getInstance().uid.toString()).get()
 
-    //------------------------------------Remove Favorite -------------------------------------------
-    fun removeFavorit(car: CarModel) =
-        firestore.collection("car")
+    //------------------------------------Remove Favorite -------------------------------------still
+    fun removeFavorit() =
+        firestore.collection("car").document().delete()
 
 
     //------------------------------------

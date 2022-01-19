@@ -43,7 +43,7 @@ class MyCarDetailFragment : Fragment() {
         binding.updateMyCarButton.setOnClickListener() {
             updateMycar()
 
-            Toast.makeText( context,"Deleted successfully", Toast.LENGTH_SHORT).show()
+            Toast.makeText( context,"Updated successfully", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.myCarFragment2)
 
         }
@@ -59,11 +59,16 @@ class MyCarDetailFragment : Fragment() {
 
 
                 myCarsViewModel.deleteMyCar(myCarInfoM)
+                Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.myCarFragment2)
             }
                 alertD.setNegativeButton("Cancel") { dialog, _ ->
                     dialog.cancel()
                 }
                 alertD.show()
+
+
+
 
 //            Toast.makeText(, "Deleted successfully", Toast.LENGTH_SHORT).show()
 //                findNavController().navigate(R.id.myCarFragment2)
