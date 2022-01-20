@@ -46,11 +46,11 @@ class FavoritFragment : Fragment() {
     fun observer() {
         favoriteViewModel.favoriteLiveData.observe(viewLifecycleOwner, {
             Log.d("observer: ", it.toString())
-            binding.progressBar2.animate().alpha(0f)
-            binding.progressBar2.animate().alpha(0F).setDuration(1000)
-            allFavoriteCars = it
+//            binding.progressBar2.animate().alpha(0f)
+//            binding.progressBar2.animate().alpha(0F).setDuration(1000)
+//            allFavoriteCars = it
             favCarAdapter.submitList(it)
-            binding.progressBar2.animate().alpha(1F)
+//            binding.progressBar2.animate().alpha(1F)
 
         })
         favoriteViewModel.favoriteErrorData.observe(viewLifecycleOwner, {

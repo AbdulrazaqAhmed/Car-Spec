@@ -81,8 +81,22 @@ class DetailFragment : Fragment() {
 //                }
             }
             binding.favoriteToggleButton.setOnClickListener(){
+
                 if (binding.favoriteToggleButton.isChecked) {
-                    favoriteViewModel.addFavorites(car)
+                    favModel = FavoriteModel()
+                    favModel.make = car.make
+                    favModel.model= car.model
+                    favModel.color = car.color
+                    favModel.year = car.year
+                    favModel.title = car.title
+                    favModel.location = car.location
+                    favModel.date = car.date
+                    favModel.price = car.price
+                    favModel.image = car.image
+                    favModel.description = car.description
+                    favModel.documentId = car.documentId
+                    favModel.userId = FirebaseAuth.getInstance().uid.toString()
+                    favoriteViewModel.addFavorites(favModel)
                 }else{
                     favoriteViewModel.removeFavorite()
                 }

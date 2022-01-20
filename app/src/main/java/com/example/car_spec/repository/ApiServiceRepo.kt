@@ -96,13 +96,13 @@ class ApiServiceRepo(context: Context) {
         firestore.collection("car").document(car.documentId).set(car)
 
     //------------------------------- favorite add --------------------------------------------still
-    fun addFavorites(car : CarModel) =
-        firestore.collection("favorite").add(car)
+    fun addFavorites(fav : FavoriteModel) =
+        firestore.collection("users").document(FirebaseAuth.getInstance().uid.toString()).collection("fav").add(fav)
 
     //------------------------------favorite get ----------------------------------------------still
     fun fitchFavorites() =
-        firestore.collection("favorite")
-            .whereEqualTo("userId", FirebaseAuth.getInstance().uid.toString()).get()
+        firestore.collection("users").document(FirebaseAuth.getInstance().uid.toString()).collection("fav").get()
+//            .whereEqualTo("userId", FirebaseAuth.getInstance().uid.toString()).get()
 
     //------------------------------------Remove Favorite -------------------------------------still
     fun removeFavorit() =

@@ -19,7 +19,7 @@ data class CarModel(
     var favorite: Boolean = false,
     var image: String = "",
     var description: String = "",
-    val userId: String = "",
+    var userId: String = "",
     @DocumentId
     val documentId : String= ""
 

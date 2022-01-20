@@ -5,13 +5,15 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.example.car_spec.R
 import com.example.car_spec.databinding.FavoriteCarLayoutBinding
-import com.example.car_spec.model.CarModel
+import com.example.car_spec.model.FavoriteModel
 import com.example.car_spec.view.viewmodel.FavoriteViewModel
 import com.squareup.picasso.Picasso
 
@@ -20,52 +22,55 @@ class FavoriteCarRecyclerAdopter (val viewModel: FavoriteViewModel, val context:
     RecyclerView.Adapter<FavoriteCarRecyclerAdopter.FavoriteViewHolder>() {
 
 
-    val FavDIF_CAL_BACK = object : DiffUtil.ItemCallback<CarModel>() {
-        override fun areItemsTheSame(oldItem: CarModel, newItem: CarModel): Boolean {
+    val FavDIF_CAL_BACK = object : DiffUtil.ItemCallback<FavoriteModel>() {
+        override fun areItemsTheSame(oldItem: FavoriteModel, newItem: FavoriteModel): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: CarModel, newItem: CarModel): Boolean {
+        override fun areContentsTheSame(oldItem: FavoriteModel, newItem: FavoriteModel): Boolean {
             return oldItem == newItem
         }
 
     }
     private val differ = AsyncListDiffer(this, FavDIF_CAL_BACK)
 
-    fun submitList(list: List<CarModel>) {
-        differ.submitList(list)
-    }
 
     override fun onCreateViewHolder(
+
         parent: ViewGroup,
         viewType: Int
     ): FavoriteCarRecyclerAdopter.FavoriteViewHolder {
-        val binding =
-            FavoriteCarLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return FavoriteViewHolder(binding)
+        return FavoriteViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.favorite_car_layout,
+                parent,
+                false
+            )
+        )
+
     }
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         val item = differ.currentList[position]
-        holder.bind(item)
-        holder.binding.titleFavoriteTextView.text = item.title
-        holder.binding.descriptionFavoriteTextView.text = item.description
-        holder.binding.FavoritePriceTextview.text = item.price.toString()
-        holder.binding.favoriteMakeTextView.text = item.make
 
-//        Glide.with(context)
-//            .load("https://firebasestorage.googleapis.com/v0/b/car-spec-9231b.appspot.com/o/image%2F${item.image}?alt=media&token=2e3a534c-22d3-48b0-8f0e-ee5a5d41897c")
-//            .centerCrop()
-//            .into(holder.myCarsimage)
+        holder.title.text = item.title
+//        holder.location.text = item.location
+//        holder.date.text = item.date.toString()
+        holder.price.text = item.price.toString()
+
+        Glide.with(context)
+            .load("https://firebasestorage.googleapis.com/v0/b/car-spec-9231b.appspot.com/o/image%2F${item.image}?alt=media&token=2e3a534c-22d3-48b0-8f0e-ee5a5d41897c")
+            .centerCrop()
+            .into(holder.image)
 
 //        holder.itemView.setOnClickListener(){ view ->
 //            viewModel.selectedItemMutableLiveData.postValue(item)
 //            view.findNavController().navigate(R.id.action_myCarFragment2_to_myCarDetailFragment)
 //        }
-        holder.binding.favoritedToggleButton.setOnClickListener {
-            if (holder.binding.favoritedToggleButton.isChecked)
-                viewModel.removeFavorite()
-        }
+//        holder.binding.favoritedToggleButton.setOnClickListener {
+//            if (holder.binding.favoritedToggleButton.isChecked)
+//                viewModel.removeFavorite()
+//        }
 
     }
 
@@ -73,17 +78,22 @@ class FavoriteCarRecyclerAdopter (val viewModel: FavoriteViewModel, val context:
         return differ.currentList.size
     }
 
-    class FavoriteViewHolder(val binding: FavoriteCarLayoutBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: CarModel) {
-            binding.titleFavoriteTextView.text = item.title
-            binding.descriptionFavoriteTextView.text = item.description
-            binding.FavoritePriceTextview.text = "${item.price} SAR"
-            binding.favoriteMakeTextView.text = item.make
-            Picasso.get().load(item.image).into(binding.photoFavoriteImageView)
-
-
-
-        }
+    fun submitList(list: List<FavoriteModel>) {
+        differ.submitList(list)
     }
+
+
+    class FavoriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+
+    val title: TextView = itemView.findViewById(R.id.titleFavorite_TextView)
+//    val location: TextView = itemView.findViewById(R.id.location_textview)
+//    val date: TextView = itemView.findViewById(R.id.dateCreated_textView)
+    val price: TextView = itemView.findViewById(R.id.FavoritePrice_textview)
+    val image: ImageView = itemView.findViewById(R.id.photoFavorite_imageView)
+//    Picasso.get().load(item.image).into(binding.photoFavoriteImageView)
+
+
+}
+
 }

@@ -1,5 +1,7 @@
 package com.example.car_spec.accessablity
 
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -27,6 +29,7 @@ class Register : AppCompatActivity() {
         val lastname : EditText = findViewById(R.id.lastNameRegister_EditText)
         val regButton: Button = findViewById(R.id.register_button)
         val haveAccount: TextView = findViewById(R.id.alreadyHaveAccountNavToLogin_textview)
+        lateinit var notificationManager: NotificationManager
 
         haveAccount.setOnClickListener() {
             startActivity(Intent(this, Login::class.java))
@@ -73,6 +76,34 @@ class Register : AppCompatActivity() {
 
         }
 
+        fun notification(){
+            notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                notificationChannel = NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
+                notificationChannel.enableLights(true)
+
+                notificationChannel.enableVibration(false)
+                notificationManager.createNotificationChannel(notificationChannel)
+
+                val intent:Intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("Notification", true)
+
+                val pendingIntent = PendingIntent.getActivity(this, 444, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+                nbuilder = Notification.Builder(this, channelId)
+                    .setSmallIcon(R.drawable.icon)
+                    .setContentTitle("Update profile")
+                    .setContentIntent(pendingIntent)
+                    .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.icon))
+            } else {
+
+                nbuilder = Notification.Builder(this)
+                    .setSmallIcon(R.drawable.icon)
+                    .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.icon))
+            }
+            notificationManager.notify(1234, nbuilder.build())
+
+        }
 
     }
 }

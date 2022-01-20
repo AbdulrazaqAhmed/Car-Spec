@@ -20,9 +20,9 @@ private const val TAG = "FavoriteViewModel"
 class FavoriteViewModel : ViewModel() {
     private val apiServ = ApiServiceRepo.get()
 val favoritesModel = mutableListOf<FavoriteModel>()
-    val favoriteLiveData = MutableLiveData<List<CarModel>>()
+    val favoriteLiveData = MutableLiveData<List<FavoriteModel>>()
     val favoriteErrorData = MutableLiveData<String>()
-    val carfitch = mutableListOf<CarModel>()
+//    val carfitch = mutableListOf<CarModel>()
 
 
     fun callFavorites() {
@@ -31,7 +31,7 @@ val favoritesModel = mutableListOf<FavoriteModel>()
 //            try {
 //                val response = apiServ.fitchFavorites()
 //                if (response.isSuccessful) {
-//                    favoriteLiveData.postValue()
+//                    favoriteLiveData.postValue(carfitch)
 //                } else {
 //                    favoriteErrorData.postValue("")
 //                    Log.d(TAG, this.toString())
@@ -44,15 +44,18 @@ val favoritesModel = mutableListOf<FavoriteModel>()
 //
 //            }
 //        }
+        var favList = mutableListOf<FavoriteModel>()
         apiServ.fitchFavorites().addOnSuccessListener { documents ->
             for (document in documents){
                 Log.d(
                     com.example.car_spec.view.viewmodel.TAG,
-                    "${document.id} => ${document.data}"
-                )
-                carfitch.add(document.toObject<CarModel>())
+                    "${document.id} => ${document.data}")
+                favList.add(document.toObject<FavoriteModel>())
+//                getCar.userId = document.id
+//                carfitch.add(document.toObject<CarModel>())
+                favoriteLiveData.postValue(favList)
             }
-            favoriteLiveData.postValue(carfitch)
+
         }.addOnFailureListener{
             Log.d(TAG, "callFavorites: Failed")
         }
@@ -75,16 +78,16 @@ val favoritesModel = mutableListOf<FavoriteModel>()
         }
     }
 
-    fun addFavorites(car : CarModel){
+    fun addFavorites(fav : FavoriteModel){
 //        val addMyCar = mutableListOf<CarModel>()
 
         viewModelScope.launch(Dispatchers.IO){
             try{
-                val response = apiServ.addFavorites(car)
+                val response = apiServ.addFavorites(fav)
 
                 if (response.isSuccessful){
                     Log.d(TAG,response.toString())
-                    favoriteLiveData.postValue(carfitch)
+//                    favoriteLiveData.postValue(carfitch)
                 }
 
             }catch (e:Exception){
