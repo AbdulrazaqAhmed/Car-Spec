@@ -7,19 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.example.car_spec.R
-import com.example.car_spec.databinding.FavoriteCarLayoutBinding
 import com.example.car_spec.model.FavoriteModel
 import com.example.car_spec.view.viewmodel.FavoriteViewModel
-import com.squareup.picasso.Picasso
 
 
-class FavoriteCarRecyclerAdopter (val viewModel: FavoriteViewModel, val context: Context):
+class FavoriteCarRecyclerAdopter(val viewModel: FavoriteViewModel, val context: Context) :
     RecyclerView.Adapter<FavoriteCarRecyclerAdopter.FavoriteViewHolder>() {
+
 
 
     val FavDIF_CAL_BACK = object : DiffUtil.ItemCallback<FavoriteModel>() {
@@ -54,8 +52,8 @@ class FavoriteCarRecyclerAdopter (val viewModel: FavoriteViewModel, val context:
         val item = differ.currentList[position]
 
         holder.title.text = item.title
-//        holder.location.text = item.location
-//        holder.date.text = item.date.toString()
+        holder.description.text = item.location
+        holder.make.text = item.date.toString()
         holder.price.text = item.price.toString()
 
         Glide.with(context)
@@ -67,10 +65,13 @@ class FavoriteCarRecyclerAdopter (val viewModel: FavoriteViewModel, val context:
 //            viewModel.selectedItemMutableLiveData.postValue(item)
 //            view.findNavController().navigate(R.id.action_myCarFragment2_to_myCarDetailFragment)
 //        }
-//        holder.binding.favoritedToggleButton.setOnClickListener {
-//            if (holder.binding.favoritedToggleButton.isChecked)
+        holder.favoriteToggelButon.setOnClickListener {
+//            if (holder.favoriteToggelButon = isChe)
 //                viewModel.removeFavorite()
-//        }
+            val instanceFavMod = mutableListOf<FavoriteModel>()
+            if (holder.favoriteToggelButon.isClickable)
+                viewModel.removeFavorite()
+        }
 
     }
 
@@ -80,20 +81,22 @@ class FavoriteCarRecyclerAdopter (val viewModel: FavoriteViewModel, val context:
 
     fun submitList(list: List<FavoriteModel>) {
         differ.submitList(list)
+
     }
 
 
     class FavoriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
-    val title: TextView = itemView.findViewById(R.id.titleFavorite_TextView)
-//    val location: TextView = itemView.findViewById(R.id.location_textview)
-//    val date: TextView = itemView.findViewById(R.id.dateCreated_textView)
-    val price: TextView = itemView.findViewById(R.id.FavoritePrice_textview)
-    val image: ImageView = itemView.findViewById(R.id.photoFavorite_imageView)
+        val title: TextView = itemView.findViewById(R.id.titleFavorite_TextView)
+        val description: TextView = itemView.findViewById(R.id.descriptionFavorite_textView)
+        val make: TextView = itemView.findViewById(R.id.favoriteMake_textView)
+        val price: TextView = itemView.findViewById(R.id.FavoritePrice_textview)
+        val favoriteToggelButon: TextView = itemView.findViewById(R.id.favorited_toggle_button)
+        val image: ImageView = itemView.findViewById(R.id.photoFavorite_imageView)
 //    Picasso.get().load(item.image).into(binding.photoFavoriteImageView)
 
 
-}
+    }
 
 }

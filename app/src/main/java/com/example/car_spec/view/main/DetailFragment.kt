@@ -101,9 +101,10 @@ class DetailFragment : Fragment() {
                     favoriteViewModel.addFavorites(favModel)
                     Toast.makeText(context, "Liked", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.carFragment)
-                }else{
-                    favoriteViewModel.removeFavorite()
                 }
+//                else{
+//
+//                }
 
 
             }

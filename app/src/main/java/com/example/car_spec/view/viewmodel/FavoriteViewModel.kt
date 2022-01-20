@@ -1,14 +1,11 @@
 package com.example.car_spec.view.viewmodel
 
-import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.car_spec.model.CarModel
 import com.example.car_spec.model.FavoriteModel
 import com.example.car_spec.repository.ApiServiceRepo
-import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -62,12 +59,13 @@ val favoritesModel = mutableListOf<FavoriteModel>()
     }
 
     fun removeFavorite() {
+        val favo = mutableListOf<FavoriteModel>()
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = apiServ.removeFavorit()
                 if (!response.isSuccessful) {
                     Log.d(TAG, "response")
-//                    favoriteLiveData.postValue()
+                    favoriteLiveData.postValue(favo)
 
                 }
             } catch (e: Exception) {
