@@ -18,7 +18,7 @@ class DateConverterTestTest{
     fun dateFormatIsValidwithvalidFormatThenReturnTrue(){
 
         val date = dateConverter.converTotLong("1642661067")
-        Assert.assertEquals("2022-01-20 9:44:34", date)
+        Assert.assertEquals("2022-01-20 09:44:27", date)
     }
 
     //returns invalid date and throw exception
@@ -26,7 +26,7 @@ class DateConverterTestTest{
     fun dateFormatIsValidWithInvalidFormatThenReturnExeption(){
 
         Assert.assertThrows(Exception::class.java , {
-            dateConverter.converTotLong("xfhfghfgh")
+            dateConverter.converTotLong("llllllllhhh")
 
         })
     }
