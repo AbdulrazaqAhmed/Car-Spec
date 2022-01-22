@@ -8,7 +8,11 @@
         android:id="@+id/favoritFragment2"
         android:name="com.example.car_spec.view.main.FavoritFragment"
         android:label="fragment_favorit"
-        tools:layout="@layout/fragment_favorit" />
+        tools:layout="@layout/fragment_favorit" >
+        <action
+            android:id="@+id/action_favoritFragment2_to_addCarFragment"
+            app:destination="@id/addCarFragment" />
+    </fragment>
     <fragment
         android:id="@+id/carFragment"
         android:name="com.example.car_spec.view.main.CarFragment"

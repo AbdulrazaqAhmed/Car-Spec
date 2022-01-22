@@ -42,8 +42,9 @@ import kotlin.streams.asSequence
 
 const val STRING_LENGTH = 10;
 const val ALPHANUMERIC_REGEX = "[a-zA-Z0-9]+"
+
 class AddCarFragment : Fragment() {
-    private val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+    private val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
     private lateinit var imagePath: String
     private lateinit var binding: FragmentAddCarBinding
     private val carViewModel: CarsViewModel by activityViewModels()
@@ -119,39 +120,42 @@ class AddCarFragment : Fragment() {
                 .asSequence()
                 .map(charPool::get)
                 .joinToString("")
+            if (brandMake.isNotEmpty() && brandModel.isNotEmpty() && brandDescription.isNotEmpty() && brandColor.isNotEmpty() && brandYear.isNotEmpty() && addTitle.isNotEmpty() &&
+                addLocation.isNotEmpty()
+            ) {
 
-            carViewModel.save(
-                CarModel(
-                    brandMake,
-                    brandModel,
-                    brandColor,
-                    brandYear,
-                    addTitle,
-                    addLocation,
-                    0, // auto genrate id
-                    "${Date()}",
-                    addPrice,
-                    true,
-                    "$randomString $formatted",
-                    brandDescription,
-                    userIdProfile!!
+                carViewModel.save(
+                    CarModel(
+                        brandMake,
+                        brandModel,
+                        brandColor,
+                        brandYear,
+                        addTitle,
+                        addLocation,
+                        0, // auto genrate id
+                        "${Date()}",
+                        addPrice,
+                        true,
+                        "$randomString $formatted",
+                        brandDescription,
+                        userIdProfile!!
 
 
-                ), image
-            )
+                    ), image
+                )
 
-            observer()
-            bindSelectedImage()
-            findNavController().navigate(R.id.carFragment)
-            Toast.makeText(context, "Information Added Successfully", Toast.LENGTH_SHORT).show()
+                observer()
+                bindSelectedImage()
+                findNavController().navigate(R.id.carFragment)
+                Toast.makeText(context, "Information Added Successfully", Toast.LENGTH_SHORT).show()
 
 //                try {
 //                    Log.d(TAG, "add price successfull")
 //                }catch (e:Exception){
 //                    Log.d(TAG, "add price Error")
 //                }
+            }
         }
-
 
     }
 
@@ -160,7 +164,7 @@ class AddCarFragment : Fragment() {
         if (requestCode == image_Picker && resultCode == RESULT_OK) {
 //            var imageUri = data!!.data
             progressDialog.show()
-             image = Matisse.obtainResult(data)[0]
+            image = Matisse.obtainResult(data)[0]
 
             Log.d(TAG, "onActivityResult: image uri ")
 //            val imageName = FirebaseAuth.getInstance().uid
@@ -172,8 +176,6 @@ class AddCarFragment : Fragment() {
             if (progressDialog.isShowing) progressDialog.dismiss()
 
 //            carViewModel.save(CarModel(), image)
-
-
 
 
         }
@@ -225,14 +227,15 @@ class AddCarFragment : Fragment() {
             .forResult(image_Picker)
 
     }
+
     fun getDate(dateStr: String) {
         try {
             /** DEBUG dateStr = '2006-04-16T04:00:00Z' **/
             val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
             val mDate = formatter.parse(dateStr) // this never ends while debugging
             Log.e("mDate", mDate.toString())
-        } catch (e: Exception){
-            Log.e("mDate",e.toString()) // this never gets called either
+        } catch (e: Exception) {
+            Log.e("mDate", e.toString()) // this never gets called either
         }
     }
 

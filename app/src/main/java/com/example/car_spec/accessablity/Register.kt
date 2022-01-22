@@ -23,11 +23,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 class Register : AppCompatActivity() {
-    lateinit var notificationManager: NotificationManager
-    lateinit var notificationChannel: NotificationChannel
-    lateinit var nbuilder: Notification.Builder
-    val channelId = "i.apps.notifications"
-    val description = "Welcome to your app"
+
     private val usersViewModel: UsersViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,7 +63,7 @@ class Register : AppCompatActivity() {
 
                             Toast.makeText(this, "Registerd successfully", Toast.LENGTH_SHORT)
                                 .show()
-                            notification()
+
                             //navigate to Main Activity
                             val intent = Intent(this, MainActivity::class.java)
                             intent.putExtra("userId", firebaseUser.uid)
@@ -93,45 +89,5 @@ class Register : AppCompatActivity() {
 
     }
 
-    fun notification() {
-        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notificationChannel =
-                NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
-            notificationChannel.enableLights(true)
-
-            notificationChannel.enableVibration(false)
-            notificationManager.createNotificationChannel(notificationChannel)
-
-            val intent: Intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("Notification", true)
-
-            val pendingIntent =
-                PendingIntent.getActivity(this, 444, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-            nbuilder = Notification.Builder(this, channelId)
-                .setSmallIcon(R.drawable.ic_baseline_notifications_active_24)
-                .setContentTitle("Welcome To Your App")
-                .setContentIntent(pendingIntent)
-                .setLargeIcon(
-                    BitmapFactory.decodeResource(
-                        this.resources,
-                        R.drawable.ic_baseline_notifications_active_24
-                    )
-                )
-        } else {
-
-            nbuilder = Notification.Builder(this)
-                .setSmallIcon(R.drawable.ic_baseline_notifications_active_24)
-                .setLargeIcon(
-                    BitmapFactory.decodeResource(
-                        this.resources,
-                        R.drawable.ic_baseline_notifications_active_24
-                    )
-                )
-        }
-        notificationManager.notify(1234, nbuilder.build())
-
-    }
 
 }

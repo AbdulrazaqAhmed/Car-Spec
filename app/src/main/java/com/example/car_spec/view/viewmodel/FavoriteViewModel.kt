@@ -58,11 +58,11 @@ val favoritesModel = mutableListOf<FavoriteModel>()
         }
     }
 
-    fun removeFavorite() {
+    fun removeFavorite(fav : FavoriteModel) {
         val favo = mutableListOf<FavoriteModel>()
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = apiServ.removeFavorit()
+                val response = apiServ.removeFavorit(fav)
                 if (!response.isSuccessful) {
                     Log.d(TAG, "response")
                     favoriteLiveData.postValue(favo)

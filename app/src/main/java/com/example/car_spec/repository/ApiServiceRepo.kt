@@ -69,8 +69,6 @@ class ApiServiceRepo(context: Context) {
     //---------------------------------Upload Car Image Fun------------------------------------------done
 
 
-//    val time: String? = Calendar.getInstance().getTime().toString()
-//    val storageRef = storageCarReference.child("/documentId_" + FirebaseAuth.getInstance().uid.toString() + "_" + time + "/")
 
     fun uploadImage(imge: Uri, imagename: String) =
         storageCarReference.child(imagename).putFile(imge)
@@ -105,8 +103,8 @@ class ApiServiceRepo(context: Context) {
 //            .whereEqualTo("userId", FirebaseAuth.getInstance().uid.toString()).get()
 
     //------------------------------------Remove Favorite -------------------------------------still
-    fun removeFavorit() =
-        firestore.collection("users").document(FirebaseAuth.getInstance().uid.toString()).collection("fav").document("fav").delete()
+    fun removeFavorit(fav : FavoriteModel) =
+        firestore.collection("users").document(fav.documentId).delete()
 
 
     //------------------------------------

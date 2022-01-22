@@ -202,6 +202,7 @@ class ProfileFragment : Fragment() {
             lastname = binding.lastNameEditText.text.toString()
             email = binding.userEmail.text.toString()
 
+
             userViewModel.updateUsers(currentUser)
         }
 

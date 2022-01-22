@@ -1,5 +1,6 @@
 package com.example.car_spec.view.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,6 +16,9 @@ import com.example.car_spec.databinding.FragmentMyCarDetailBinding
 import com.example.car_spec.model.CarModel
 import com.example.car_spec.view.adapters.CarRecyclerViewAdapter
 import com.example.car_spec.view.viewmodel.MyCarsViewModel
+import com.zhihu.matisse.Matisse
+import com.zhihu.matisse.MimeType
+import com.zhihu.matisse.internal.entity.CaptureStrategy
 
 private const val TAG = "MyCarDetailFragment"
 
@@ -22,6 +26,7 @@ class MyCarDetailFragment : Fragment() {
     private val myCarsViewModel: MyCarsViewModel by activityViewModels()
     private lateinit var binding: FragmentMyCarDetailBinding
     private lateinit var myCarInfoM : CarModel
+    private val image_picker = 1
 
 
     override fun onCreateView(
@@ -39,6 +44,10 @@ class MyCarDetailFragment : Fragment() {
 
         observer()
 
+        binding.myCarphotoDetailsImageView.setOnClickListener(){
+
+            showImagePicker()
+        }
 
         binding.updateMyCarButton.setOnClickListener() {
             updateMycar()
@@ -88,14 +97,16 @@ class MyCarDetailFragment : Fragment() {
                     .into(binding.myCarphotoDetailsImageView)
 
 
+
                 binding.myCartitleDetailTextView.setText(myCar.title)
-                binding.myCardetailCarPriceTextview.setText(myCar.price.toString())
+                binding.myCardetailCarPriceEdittext.setText(myCar.price.toString())
                 binding.myCardetailColorTextview.setText(myCar.color)
                 binding.myCardetailDescriptionTextView.setText(myCar.description)
                 binding.myCardetailMakeTextView.setText(myCar.make)
                 binding.myCardetailModelTextview.setText(myCar.model)
                 binding.myCardetailYearTextView.setText(myCar.year)
                 binding.myCardetailLocationTextView.setText(myCar.location)
+
 
                 myCarInfoM = myCar
 
@@ -123,11 +134,27 @@ class MyCarDetailFragment : Fragment() {
         myCarInfoM.year    = binding.myCardetailYearTextView.text.toString()
         myCarInfoM.location= binding.myCardetailLocationTextView.text.toString()
         myCarInfoM.description= binding.myCardetailDescriptionTextView.text.toString()
+        myCarInfoM.price     = binding.myCardetailCarPriceEdittext.text.toString().toDouble()
+
+
 
         myCarsViewModel.editMycarInfo(myCarInfoM)
 
     }
 
+    fun showImagePicker() {
+        Matisse.from(this)
+            .choose(MimeType.ofImage(), false)
+            .capture(true)
+            .captureStrategy(CaptureStrategy(true, "com.example.car_spec"))
+            .forResult(image_picker)
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+    }
 
 
 

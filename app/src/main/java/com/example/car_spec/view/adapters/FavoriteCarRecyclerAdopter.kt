@@ -14,10 +14,10 @@ import com.example.car_spec.R
 import com.example.car_spec.model.FavoriteModel
 import com.example.car_spec.view.viewmodel.FavoriteViewModel
 
+private lateinit var myfavo: FavoriteModel
 
 class FavoriteCarRecyclerAdopter(val viewModel: FavoriteViewModel, val context: Context) :
     RecyclerView.Adapter<FavoriteCarRecyclerAdopter.FavoriteViewHolder>() {
-
 
 
     val FavDIF_CAL_BACK = object : DiffUtil.ItemCallback<FavoriteModel>() {
@@ -51,26 +51,26 @@ class FavoriteCarRecyclerAdopter(val viewModel: FavoriteViewModel, val context: 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         val item = differ.currentList[position]
 
-        holder.title.text = item.title
-        holder.description.text = item.location
-        holder.make.text = item.date.toString()
-        holder.price.text = item.price.toString()
+            holder.title.text = item.title
+            holder.description.text = item.location
+            holder.make.text = item.date.toString()
+            holder.price.text = item.price.toString()
 
-        Glide.with(context)
-            .load("https://firebasestorage.googleapis.com/v0/b/car-spec-9231b.appspot.com/o/image%2F${item.image}?alt=media&token=2e3a534c-22d3-48b0-8f0e-ee5a5d41897c")
-            .centerCrop()
-            .into(holder.image)
 
-//        holder.itemView.setOnClickListener(){ view ->
-//            viewModel.selectedItemMutableLiveData.postValue(item)
-//            view.findNavController().navigate(R.id.action_myCarFragment2_to_myCarDetailFragment)
-//        }
+
+            Glide.with(context)
+                .load("https://firebasestorage.googleapis.com/v0/b/car-spec-9231b.appspot.com/o/image%2F${item.image}?alt=media&token=2e3a534c-22d3-48b0-8f0e-ee5a5d41897c")
+                .centerCrop()
+                .into(holder.image)
+            myfavo = item
+
+
+
         holder.favoriteToggelButon.setOnClickListener {
-//            if (holder.favoriteToggelButon = isChe)
-//                viewModel.removeFavorite()
+
             val instanceFavMod = mutableListOf<FavoriteModel>()
             if (holder.favoriteToggelButon.isClickable)
-                viewModel.removeFavorite()
+                viewModel.removeFavorite(myfavo)
         }
 
     }

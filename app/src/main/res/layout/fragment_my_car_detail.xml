@@ -8,20 +8,32 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="6dp">
+
+        <TextView
+            android:id="@+id/textView"
+            style="bool"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textSize="22sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/myCartitleDetail_TextView"
             android:layout_width="346dp"
-            android:layout_height="63dp"
-            android:layout_marginTop="32dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:hint="Title"
             android:textSize="27sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <ImageView
             android:id="@+id/myCarphotoDetails_imageView"
@@ -33,6 +45,15 @@
             app:layout_constraintTop_toBottomOf="@+id/myCartitleDetail_TextView"
             tools:src="@tools:sample/avatars" />
 
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textStyle="bold|italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myCarphotoDetails_imageView" />
+
         <EditText
             android:id="@+id/myCardetailDescription_textView"
             android:layout_width="match_parent"
@@ -40,12 +61,12 @@
             android:layout_margin="2dp"
             android:hint="Description"
             android:minHeight="48dp"
-            android:padding="1dp"
+            android:padding="6dp"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/myCarphotoDetails_imageView"
+            app:layout_constraintTop_toBottomOf="@+id/textView7"
             tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
         <EditText
@@ -54,37 +75,35 @@
             android:layout_height="40dp"
             android:layout_margin="2dp"
             android:hint="Make"
-            android:padding="1dp"
+            android:padding="6dp"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.75"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/myCardetailDescription_textView" />
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
         <EditText
             android:id="@+id/myCardetailModel.Textview"
             android:layout_width="407dp"
             android:layout_height="42dp"
             android:layout_margin="2dp"
-            android:layout_marginTop="16dp"
             android:hint="Model"
-            android:padding="1dp"
+            android:padding="6dp"
             android:textSize="17sp"
-            app:layout_constraintTop_toBottomOf="@+id/myCardetailLocation_textView"
-            tools:layout_editor_absoluteX="2dp" />
+            app:layout_constraintTop_toBottomOf="@+id/textView11"
+            tools:layout_editor_absoluteX="-4dp" />
 
         <EditText
             android:id="@+id/myCardetailLocation_textView"
             android:layout_width="407dp"
             android:layout_height="39dp"
             android:layout_margin="2dp"
-            android:layout_marginTop="48dp"
             android:hint="Location"
-            android:padding="1dp"
+            android:padding="6dp"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.333"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/myCardetailMake_textView" />
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
         <EditText
             android:id="@+id/myCardetailColor_textview"
@@ -92,37 +111,37 @@
             android:layout_height="39dp"
             android:layout_margin="2dp"
             android:hint="Color"
-            android:padding="1dp"
+            android:paddingLeft="5dp"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.666"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/myCardetailModel.Textview" />
+            app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
         <EditText
             android:id="@+id/myCardetailYear_textView"
             android:layout_width="408dp"
-            android:layout_height="34dp"
+            android:layout_height="wrap_content"
             android:layout_margin="2dp"
+            android:layout_marginTop="4dp"
             android:hint="Year"
-            android:padding="1dp"
+            android:paddingLeft="5dp"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.666"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/myCardetailColor_textview" />
+            app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
         <EditText
-            android:id="@+id/myCardetailCarPrice_textview"
+            android:id="@+id/myCardetailCarPrice_Edittext"
             android:layout_width="130dp"
             android:layout_height="38dp"
             android:layout_margin="2dp"
+            android:layout_marginTop="8dp"
             android:hint="Price"
-            android:padding="1dp"
+            android:padding="6dp"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView14"
             app:layout_constraintTop_toBottomOf="@+id/myCardetailYear_textView" />
 
         <Button
@@ -132,7 +151,7 @@
             android:layout_marginTop="8dp"
             android:text="update"
             app:cornerRadius="25dp"
-            app:layout_constraintTop_toBottomOf="@+id/myCardetailCarPrice_textview"
+            app:layout_constraintTop_toBottomOf="@+id/myCardetailCarPrice_Edittext"
             tools:layout_editor_absoluteX="2dp" />
 
         <Button
@@ -145,6 +164,62 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/updateMyCar_button" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Make"
+            android:textStyle="bold|italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myCardetailDescription_textView" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location"
+            android:textStyle="bold|italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myCardetailMake_textView" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Model"
+            android:textStyle="bold|italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myCardetailLocation_textView" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Color"
+            android:textStyle="bold|italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myCardetailModel.Textview" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Year"
+            android:textStyle="bold|italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myCardetailColor_textview" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="107dp"
+            android:layout_marginTop="9dp"
+            android:text="Price"
+            android:textStyle="bold|italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myCardetailYear_textView" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
