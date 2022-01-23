@@ -38,4 +38,8 @@ Users direct message.
 
 ![Login](https://user-images.githubusercontent.com/91452385/150700845-869cb3b8-83af-4818-b24f-8d7edccc9cc4.png)
 
-![Screenshot_20220124-015322_Car-Spec](https://user-images.githubusercontent.com/91452385/150701611-def54773-ec59-40ae-b745-53d45d80ef22.jpg)
+
+![addCarPic_Car-Spec](https://user-images.githubusercontent.com/91452385/150701880-e7bc69ba-7ef3-4e33-907a-fd5dcfa8a2b0.jpg)
+![Favorite Car_Car-Spec](https://user-images.githubusercontent.com/91452385/150701882-d074b7b0-a2d8-41b2-b9fb-b06a6ccb1dc5.jpg)
+![My Car Fragment_Car-Spec](https://user-images.githubusercontent.com/91452385/150701887-91391f2a-698e-4b9e-b644-6da6a5525ad5.jpg)
+![Screenshot_20220124-015322_Car-Spec](https://user-images.githubusercontent.com/91452385/150702009-88eefbe9-27d7-4cd2-a80d-d0cf663ee094.jpg)
