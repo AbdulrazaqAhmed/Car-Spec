@@ -46,4 +46,5 @@ Users direct message.
 ![Main Fragment_Car-Spec11](https://user-images.githubusercontent.com/91452385/150702344-38ee6e09-0316-40d2-9415-59d958b5f0ff.jpg)
 ![My Car_Car-Spec11](https://user-images.githubusercontent.com/91452385/150702349-a0413919-bccb-443c-ad7c-5ec103be4134.jpg)
 ![Reset Account_Car-Spec11](https://user-images.githubusercontent.com/91452385/150702353-e9989f36-1222-4653-b8a1-2c517bf3ef65.jpg)
-![Splash](https://user-images.githubusercontent.com/91452385/150702397-5c35087a-fff9-4966-a4d1-d4c020dcacdd.png)
+
+![Splash22](https://user-images.githubusercontent.com/91452385/150702458-ddbe1ca1-d03d-4428-94dc-6d0c865b07a6.png)
