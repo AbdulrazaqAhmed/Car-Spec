@@ -1,7 +1,7 @@
 ![image](https://user-images.githubusercontent.com/91452385/140163605-bc905803-1b3d-43ac-b406-2244fd5d7218.png)
 
 ________________________________________________________________________________________________________________
-# Final Projact_Car-Spec
+# Final Project_Car-Spec
 <br> Car specification app is craeted to record and keep track of your favorite vehicle <br>
 <br> you can record and document your favorite car from the database<br>
 
