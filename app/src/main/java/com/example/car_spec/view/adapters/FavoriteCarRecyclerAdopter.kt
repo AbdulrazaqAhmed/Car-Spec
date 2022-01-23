@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import android.widget.ToggleButton
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
@@ -69,8 +71,12 @@ class FavoriteCarRecyclerAdopter(val viewModel: FavoriteViewModel, val context: 
         holder.favoriteToggelButon.setOnClickListener {
 
             val instanceFavMod = mutableListOf<FavoriteModel>()
-            if (holder.favoriteToggelButon.isClickable)
+
+            if (holder.favoriteToggelButon.isChecked == false){
                 viewModel.removeFavorite(myfavo)
+                Toast.makeText(context, "Un Liked", Toast.LENGTH_SHORT).show()
+
+            }
         }
 
     }
@@ -92,7 +98,7 @@ class FavoriteCarRecyclerAdopter(val viewModel: FavoriteViewModel, val context: 
         val description: TextView = itemView.findViewById(R.id.descriptionFavorite_textView)
         val make: TextView = itemView.findViewById(R.id.favoriteMake_textView)
         val price: TextView = itemView.findViewById(R.id.FavoritePrice_textview)
-        val favoriteToggelButon: TextView = itemView.findViewById(R.id.favorited_toggle_button)
+        val favoriteToggelButon: ToggleButton = itemView.findViewById(R.id.favorited_toggle_button)
         val image: ImageView = itemView.findViewById(R.id.photoFavorite_imageView)
 //    Picasso.get().load(item.image).into(binding.photoFavoriteImageView)
 

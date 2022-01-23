@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_favoritFragment2_to_addCarFragment"
             app:destination="@id/addCarFragment" />
+        <action
+            android:id="@+id/action_favoritFragment2_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/carFragment"

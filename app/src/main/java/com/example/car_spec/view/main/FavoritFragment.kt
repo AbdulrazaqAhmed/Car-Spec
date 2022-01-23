@@ -1,5 +1,6 @@
 package com.example.car_spec.view.main
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -11,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.car_spec.R
 import com.example.car_spec.accessablity.Login
+import com.example.car_spec.accessablity.SHARED_PREF_FILE
 import com.example.car_spec.databinding.FragmentFavoritBinding
 import com.example.car_spec.model.CarModel
 import com.example.car_spec.model.FavoriteModel
@@ -37,6 +39,7 @@ class FavoritFragment : Fragment() {
     ): View? {
         binding = FragmentFavoritBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,11 +56,11 @@ class FavoritFragment : Fragment() {
     fun observer() {
         favoriteViewModel.favoriteLiveData.observe(viewLifecycleOwner, {
             Log.d("observer: ", it.toString())
-//            binding.progressBar2.animate().alpha(0f)
-//            binding.progressBar2.animate().alpha(0F).setDuration(1000)
+            binding.progressBar.animate().alpha(0f)
+            binding.progressBar.animate().alpha(0F).setDuration(1000)
 //            allFavoriteCars = it
             favCarAdapter.submitList(it)
-//            binding.progressBar2.animate().alpha(1F)
+//            binding.progressBar.animate().alpha(1F)
 
         })
         favoriteViewModel.favoriteErrorData.observe(viewLifecycleOwner, {
@@ -73,6 +76,8 @@ class FavoritFragment : Fragment() {
 
         when (item.itemId) {
             R.id.logout_item -> {
+                sharedpreff = requireActivity().getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
+                sharedPreffEditor = sharedpreff.edit()
                 sharedPreffEditor.putBoolean("state", false)
                 sharedPreffEditor.commit()
                 logoutItem.isVisible = true
@@ -88,7 +93,7 @@ class FavoritFragment : Fragment() {
 
             }
             R.id.profile_item -> {
-                findNavController().navigate(R.id.action_carFragment_to_profileFragment)
+                findNavController().navigate(R.id.action_favoritFragment2_to_profileFragment)
 
             }
             R.id.addFragment -> {

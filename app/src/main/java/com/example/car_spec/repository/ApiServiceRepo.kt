@@ -104,7 +104,7 @@ class ApiServiceRepo(context: Context) {
 
     //------------------------------------Remove Favorite -------------------------------------still
     fun removeFavorit(fav : FavoriteModel) =
-        firestore.collection("users").document(fav.documentId).delete()
+        firestore.collection("users").document(FirebaseAuth.getInstance().uid.toString()).collection("fav").document(fav.documentId).delete()
 
 
     //------------------------------------

@@ -158,7 +158,7 @@ class ProfileFragment : Fragment() {
             //            binding.profileProgressBar.animate().alpha(0f)
             binding.firstNameEditTex.setText(it.firstname)
             binding.lastNameEditText.setText(it.lastname)
-            binding.userEmail.text = it.email
+            binding.emailTextView.text = it.email
              currentUser = it
 
         })
@@ -200,7 +200,7 @@ class ProfileFragment : Fragment() {
         currentUser.apply {
             firstname = binding.firstNameEditTex.text.toString()
             lastname = binding.lastNameEditText.text.toString()
-            email = binding.userEmail.text.toString()
+
 
 
             userViewModel.updateUsers(currentUser)

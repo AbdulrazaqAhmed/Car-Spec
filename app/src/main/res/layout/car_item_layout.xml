@@ -5,15 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
+    android:backgroundTint="#393735"
+    app:contentPadding="7dp"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="10dp">
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="385dp"
+        android:layout_height="382dp"
         android:gravity="center_horizontal"
+        android:background="#F3D1A6"
         android:orientation="vertical">
 
         <ImageView
@@ -68,7 +71,7 @@
                 android:layout_marginTop="1dp"
                 android:layout_marginRight="7dp"
                 android:padding="5dp"
-                android:textColor="@android:color/holo_blue_bright"
+                android:textColor="@color/black"
                 android:textSize="15dp" />
 
             <TextView

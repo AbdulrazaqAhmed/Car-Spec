@@ -63,13 +63,13 @@ class DetailFragment : Fragment() {
                     .load(imagePath)
                     .into(binding.photoDetailsImageView)
 
-                binding.detailDescriptionTextView.text = "Description: ${Car.description}"
-                binding.detailCarPriceTextview.text = "Price: ${Car.price}"
-                binding.detailMakeTextView.text = "Make: ${Car.make}"
-                binding.detailModelTextview.text= "Model: ${Car.model}"
-                binding.detailLocationTextView.text = "Location: ${Car.location}"
-                binding.detailColorTextview.text= "Color: ${Car.color}"
-                binding.detailYearTextView.text = "Year: ${Car.year}"
+                binding.detailDescriptionTextView.text = Car.description
+                binding.detailCarPriceTextview.text = " ${Car.price} SAR"
+                binding.detailMakeTextView.text = Car.make
+                binding.detailModelTextview.text= Car.model
+                binding.detailLocationTextView.text = Car.location
+                binding.detailColorTextview.text= Car.color
+                binding.detailYearTextView.text = Car.year
 
                 car = Car
 
@@ -102,9 +102,10 @@ class DetailFragment : Fragment() {
                     Toast.makeText(context, "Liked", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.carFragment)
                 }
-//                else{
-//
-//                }
+                else{
+
+                    favoriteViewModel.removeFavorite(favModel)
+                }
 
 
             }

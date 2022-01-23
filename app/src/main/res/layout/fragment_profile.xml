@@ -19,12 +19,16 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profilePic_imageView"
-            android:layout_width="320dp"
-            android:layout_height="175dp"
+            android:layout_width="313dp"
+            android:layout_height="208dp"
             android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:padding="18dp"
             android:scrollbarSize="15dp"
+            app:civ_border_color="#000"
+            app:civ_border_width="2dp"
             app:srcCompat="@drawable/img" />
 
         <androidx.cardview.widget.CardView
@@ -37,63 +41,103 @@
 
                 <EditText
                     android:id="@+id/firstName_editTex"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="44dp"
+                    android:layout_width="403dp"
+                    android:layout_height="63dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/email_login"
+                    android:backgroundTint="@color/black"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:padding="17dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_editor_absoluteX="0dp" />
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9"
+                    tools:layout_editor_absoluteX="5dp" />
+
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Last Name"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/firstName_editTex" />
 
                 <EditText
                     android:id="@+id/lastName_editText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="52dp"
+                    android:layout_width="403dp"
+                    android:layout_height="63dp"
+                    android:background="@drawable/email_login"
+                    android:backgroundTint="@color/black"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:padding="17dp"
-                    app:layout_constraintTop_toBottomOf="@+id/firstName_editTex"
-                    tools:layout_editor_absoluteX="0dp" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView15"
+                    tools:layout_editor_absoluteX="4dp" />
 
                 <TextView
-                    android:id="@+id/userEmail"
+                    android:id="@+id/email_textView"
                     android:layout_width="205dp"
                     android:layout_height="34dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="187dp"
-                    android:padding="17dp"
-                    android:text="email"
+                    android:layout_marginTop="16dp"
                     android:textColor="@color/black"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/lastName_editText" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
                 <Button
                     android:id="@+id/updateProfile_button"
-                    android:layout_width="match_parent"
+                    android:layout_width="355dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="29dp"
+                    android:layout_marginTop="16dp"
                     android:text="update"
                     app:cornerRadius="22dp"
-                    app:layout_constraintTop_toBottomOf="@+id/userEmail"
-                    tools:layout_editor_absoluteX="0dp" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.452"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/email_textView" />
 
                 <Button
                     android:id="@+id/deletePro_textView"
-                    android:layout_width="match_parent"
+                    android:layout_width="355dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:text="delete"
                     app:cornerRadius="22dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintHorizontal_bias="0.465"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/updateProfile_button"
-                    app:layout_constraintVertical_bias="0.02" />
+                    app:layout_constraintVertical_bias="0.024" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="First Name"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Email"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lastName_editText" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
