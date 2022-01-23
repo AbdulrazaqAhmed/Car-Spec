@@ -32,6 +32,8 @@ ________________________________________________________________________________
 Users direct message.
 
 ## <br> Screen Shots of the App <br>
-file:///C:/Users/MSI/OneDrive/Bilder/cars%20icons/pages%20imported%20to%20android/Login.png
+[carspecpics.zip](https://github.com/AbdulrazaqAhmed/Car-Spec/files/7921621/carspecpics.zip)
 
 
+
+![Login](https://user-images.githubusercontent.com/91452385/150700845-869cb3b8-83af-4818-b24f-8d7edccc9cc4.png)
